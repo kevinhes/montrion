@@ -9,29 +9,35 @@ export default function OverView({ bannerGroup, contentList }) {
   return (
     <div>
       <HeaderPageElement></HeaderPageElement>
-      <div className="relative h-[730px] pt-[138px]">
-        <div className="relative z-10 w-full flex justify-end pr-[81px]">
+      <div className="relative md:h-[730px] pt-[30px] md:pt-[138px]">
+        <div className="relative z-10 w-full flex justify-end md:pr-[81px] mx-auto md:mx-0 max-w-[327px] md:max-w-none mb-[30px] md:mb-0">
           <div>
-            <h3 className='text-white w-[639px] font-opensans text-[20px] leading-[36px] tracking-[2px] font-normal pb-[11px] border-b border-white mb-[36px]'>
+            <h3 className='text-[#2E4E4C] md:text-white md:w-[639px] font-opensans
+            text-[12px] md:text-[20px] leading-[16px] md:leading-[36px] tracking-[2px] font-normal pb-[10px]
+            md:pb-[11px] border-b border-[#2E4E4C] md:border-white md:mb-[36px] mb-[24px]'>
               {bannerGroup.title}
             </h3>
-            <p className='text-white w-[665px] font-crimson text-[36px] leading-[45px] font-bold' dangerouslySetInnerHTML={{ __html: bannerGroup.content }} />
+            <p className='text-[#723C3F] md:text-white
+            md:w-[665px] font-crimson md:text-[36px] text-[20px] md:leading-[45px] leading-[22px] font-bold' dangerouslySetInnerHTML={{ __html: bannerGroup.content }} />
           </div>
         </div>
-        <div className="absolute w-full h-full top-0 left-0">
-          <Image src={bannerGroup.bg_img.url} width={1524} height={730} className='w-full h-full' />
+        <div className="hidden md:block absolute w-full h-full top-0 left-0">
+          <Image src={bannerGroup.bg_img.url} width={1524} height={730} className='w-full h-full object-cover' alt="" />
+        </div>
+        <div className="md:hidden w-full h-full top-0 left-0">
+          <Image src={bannerGroup.sm_bg_img.url} width={614} height={421} className='w-full h-full object-cover' alt="" />
         </div>
       </div>
-      <div className='py-[104px]'>
+      <div className='pt-[30px] pb-[81px] md:py-[104px]'>
         {
           contentList.map((item, index) => {
-            const finalClass = index === contentList.length - 1 ? '' : 'mb-[50px]';
+            const finalClass = index === contentList.length - 1 ? '' : 'md:mb-[50px] mb-[36px]';
             return (
-              <div className={`pl-[110px] w-[1120px] ${finalClass}`} key={index}>
-                <h2 className='text-[#723C3F] font-crimson text-[36px] leading-[42px] font-bold mb-[20px]'>
+              <div className={`mx-auto md:mx-0 max-w-[327px] md:max-w-none md:pl-[110px] md:w-[1120px] ${finalClass}`} key={index}>
+                <h2 className='text-[#723C3F] font-crimson md:text-[20px] md:leading-[35px] font-bold md:mb-[20px] mb-[24px]'>
                   {item.title}
                 </h2>
-                <p className='text-[#723C3F] font-opensans text-[24px] opacity-70 leadgin-[33px]' dangerouslySetInnerHTML={{ __html: item.content }} />
+                <p className='text-[#723C3F] font-opensans md:text-[24px] text-[15px] opacity-70 md:leadging-[33px] leading-normal' dangerouslySetInnerHTML={{ __html: item.content }} />
               </div>
             )
           })

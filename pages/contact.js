@@ -9,41 +9,59 @@ export default function OverView({ banner }) {
   return (
     <div>
       <HeaderPageElement></HeaderPageElement>
-      <div className='h-[300px]'>
+      <div className='max-w-[327px] mx-auto pt-[30px]'>
+        <h3 className='md:w-[680px] text-[#2E4E4C] font-opensans
+        md:text-[20px] text-[12px] md:leading-[36px] tracking-[2px] font-normal
+        md:pb-[11px] pb-[10px] border-b border-[#2E4E4C] md:mb-[36px] mb-[24px]'>
+          CONTACT
+        </h3>
+        <h2 className="text-[#723C3F] md:w-[680px] font-crimson
+        md:text-[36px] text-[20px] md:leading-[42px] leading-normal font-bold mb-[30px]">
+          Stay connected
+        </h2>
+      </div>
+      <div className='md:h-[300px] h-[250px]'>
         <Image src={banner.url} alt='banner' width={1512} height={300} className='w-full h-full object-cover'/>
       </div>
-      <div className='pt-[100px] pb-[101px]'>
-        <h1 className='text-center text-[36px] font-crimson leading-[42px] font-bold text-[#723C3F] mb-[51px]'>Stay connected</h1>
-        <form action="" className='mx-auto max-w-[845px]'>
-          <div className="flex mb-5">
+      <div className='md:pt-[100px] pt-[30px] md:pb-[101px] pb-[67px]'>
+        <h1 className='hidden md:block text-center text-[36px] font-crimson leading-[42px] font-bold text-[#723C3F] mb-[51px]'>Stay connected</h1>
+        <form action="" className='mx-auto max-w-[327px] md:max-w-[845px]'>
+          <div className="md:flex md:mb-5 mb-[10px]">
             <input
             type="text"
-            className='mr-5 flex-grow form-control font-opensans pt-[15px] pb-[22px] pl-[41px]'
+            className='md:mr-5 w-full md:w-auto flex-grow form-control font-opensans
+            md:pt-[15px] md:pb-[22px] md:pl-[41px] mb-[10px] py-[11px] pl-[18px] md:mb-0'
             placeholder='First name' />
             <input
               type="text"
-              className='flex-grow form-control font-opensans pt-[18px] pb-[19px] pl-[36px]'
+              className='w-full md:w-auto flex-grow form-control font-opensans md:pt-[18px] md:pb-[19px] md:pl-[36px]
+              py-[11px] pl-[18px]'
               placeholder='Last name' />
           </div>
-          <div className="flex mb-5">
+          <div className="md:flex md:mb-5 mb-[10px]">
             <input
             type="text"
-            className='mr-5 flex-grow form-control font-opensans pt-[19px] pb-[18px] pl-[41px]'
+            className='md:mr-5 w-full md:w-auto flex-grow
+            form-control font-opensans md:pt-[19px] md:pb-[18px] md:pl-[41px]
+            mb-[10px] md:mb-0 py-[11px] pl-[18px]'
             placeholder='Company' />
             <input
               type="text"
-              className='flex-grow form-control font-opensans pt-[18px] pb-[19px] pl-[36px]'
+              className='w-full md:w-auto flex-grow form-control font-opensans md:pt-[18px] md:pb-[19px] md:pl-[36px]
+              py-[11px] pl-[18px]'
               placeholder='Position' />
           </div>
-          <div className='mb-5'>
+          <div className='md:mb-5 mb-[10px]'>
             <input
               type="text"
-              className='form-control w-full pt-[19px] pb-[18px] pl-[41px] font-opensans'
+              className='form-control w-full md:pt-[19px] md:pb-[18px] md:pl-[41px] font-opensans
+              py-[11px] pl-[18px]'
               placeholder='Subject' />
           </div>
-          <div className="mb-[30px]">
+          <div className="md:mb-[30px] mb-[24px]">
             <textarea
-              className='form-control w-full pt-[19px] pb-[18px] pl-[41px] font-opensans'
+              className='form-control w-full md:pt-[19px] md:pb-[18px] md:pl-[41px] font-opensans
+              py-[11px] pl-[18px]'
               placeholder='Message'
               name=""
               id=""
@@ -51,8 +69,10 @@ export default function OverView({ banner }) {
               rows="10">
             </textarea>
           </div>
-          <div className="flex justify-center">
-            <input type="submit" value="Submit" className='py-[27px] px-[60px] border border-[#2E4E4C] text-[26px] text-[#2E4E4C] font-semibold leading-[20px] font-opensans hover:bg-[#2E4E4C] hover:text-white' />
+          <div className="flex justify-center"> 
+            <input type="submit" value="Submit" className='md:py-[27px] py-[14px] md:px-[60px] px-[30px]
+            border border-[#2E4E4C] md:text-[26px] text-[14px] text-[#2E4E4C] font-semibold
+            md:leading-[20px] leading-normal font-opensans hover:bg-[#2E4E4C] hover:text-white' />
           </div>
         </form>
       </div>

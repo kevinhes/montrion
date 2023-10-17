@@ -11,6 +11,7 @@ module.exports = {
         heading: ["Aboreto", "cursive"],
         body: ["Poppins", "sans-serif"],
         crimson: ["Crimson Pro", "serif"],
+        crimsontext: ["Crimson Text", "serif"],
         opensans: ["Open Sans", "sans"],
       },
       transitionProperty: {
