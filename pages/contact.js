@@ -9,7 +9,7 @@ export default function OverView({ banner }) {
   return (
     <div>
       <HeaderPageElement></HeaderPageElement>
-      <div className='max-w-[327px] mx-auto pt-[30px]'>
+      <div className='max-w-[327px] mx-auto pt-[30px] md:hidden'>
         <h3 className='md:w-[680px] text-[#2E4E4C] font-opensans
         md:text-[20px] text-[12px] md:leading-[36px] tracking-[2px] font-normal
         md:pb-[11px] pb-[10px] border-b border-[#2E4E4C] md:mb-[36px] mb-[24px]'>
