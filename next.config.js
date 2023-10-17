@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [],
+    domains: ['montrion.local', 'montrion.designhu-demo.com'],
   },
 };
 

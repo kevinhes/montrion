@@ -3,3 +3,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.text-under-deco::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  background: #222727;
+  width: 100%;
+  left: 0;
+  opacity: .1;
+}
+
+.form-control {
+  background: rgba(236, 236, 236, .7);
+  border-radius: 5px;
+}
+
+.form-control::placeholder {
+  font-size: 24px;
+  line-height: 33px;
+  font-weight: 400;
+  color: #723C3F;
+  opacity: .7;
+  font-weight: 400;
+}
+
+.full-screen-overlay {
+  position: fixed;
+  top: 97px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 97px);
+  z-index: 40;
+  background: #222727;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity .3s ease-in-out;
+  transform: translateY(150%);
+}
+
+.full-screen-overlay.active {
+  opacity: .7;
+  transform: translateY(50%);
+}

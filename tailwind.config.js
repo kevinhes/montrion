@@ -10,7 +10,12 @@ module.exports = {
       fontFamily: {
         heading: ["Aboreto", "cursive"],
         body: ["Poppins", "sans-serif"],
+        crimson: ["Crimson Pro", "serif"],
+        opensans: ["Open Sans", "sans"],
       },
+      transitionProperty: {
+        'height': 'height',
+      }
     },
   },
   plugins: [],
