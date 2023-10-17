@@ -47,5 +47,5 @@
 
 .full-screen-overlay.active {
   opacity: .7;
-  transform: translateY(50%);
+  transform: translateY(0%);
 }
