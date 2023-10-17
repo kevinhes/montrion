@@ -31,7 +31,7 @@ export const HeaderElement = ( { logo } ) => {
                 width={189}
                 height={21}
               />
-              <h1>montrion</h1>
+              <h1 className="hidden">montrion</h1>
             </Link>
           </div>
           <div
