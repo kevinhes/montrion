@@ -30,12 +30,11 @@ export default function OverView({ banner }) {
             <input
             type="text"
             className='md:mr-5 w-full md:w-auto flex-grow form-control font-opensans
-            md:pt-[15px] md:pb-[22px] md:pl-[41px] mb-[10px] py-[11px] pl-[18px] md:mb-0'
+            md:pt-[18px] md:pb-[19px] md:pl-[41px] mb-[10px] py-[11px] pl-[18px] md:mb-0'
             placeholder='First name' />
             <input
               type="text"
-              className='w-full md:w-auto flex-grow form-control font-opensans md:pt-[18px] md:pb-[19px] md:pl-[36px]
-              py-[11px] pl-[18px]'
+              className='w-full md:w-auto flex-grow form-control font-opensans md:pt-[18px] md:pb-[19px] md:pl-[36px] py-[11px] pl-[18px]'
               placeholder='Last name' />
           </div>
           <div className="md:flex md:mb-5 mb-[10px]">
