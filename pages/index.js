@@ -53,21 +53,36 @@ export async function getStaticProps() {
 
 export default function Home({ banner, banner_list, up_arrow }) {
   const [activeBanner, setActiveBanner] = useState(null);
-  const isMobile = useIsMobile();
+  const [isHovering, setIsHovering] = useState(false);
 
-  console.log(isMobile);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if ( !isHovering ) {
+        setActiveBanner((prevBanner) => (prevBanner + 1) % banner_list.length);
+      }
+    }, 3000);
+  
+    // 清除定時器，當組件卸載時
+    return () => clearInterval(interval);
+  }, [isHovering]);
+  const isMobile = useIsMobile();
 
   function bgChangeEnter(e,index) {
     if ( isMobile ) {
       e.preventDefault();
       setActiveBanner(index);
+      setIsHovering(true);
     } else {
       setActiveBanner(index);
+      setIsHovering(true);
     }
   }
+
   function bgChangeLeave() {
     setActiveBanner();
+    setIsHovering(false);
   }
+  
   const routeMapping = ['/history', '/assets', '/contact']
   return (
     <div className="relative">
@@ -79,7 +94,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
             <h2
               className="text-white text-center font-crimsontext font-semibold
               text-[32px] leading-[42px]
-              md:text-[60px] md:leading-[68px]">
+              md:text-[55px] md:leading-[68px]">
               {banner.title}
             </h2>
           </div>
@@ -98,7 +113,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
               <div className="relative z-10">
                 <h2 className="text text-white text-center font-crimsontext w-[303px] md:w-[905px] mb-5 md:mb-0
                 text-[32px] leading-[42px]
-                md:text-[60px] md:leading-[68px]">
+                md:text-[55px] md:leading-[68px]">
                   {bannerItem.content}
                 </h2>
                 <div className="flex justify-center">
@@ -111,12 +126,11 @@ export default function Home({ banner, banner_list, up_arrow }) {
               </div>
               <Image
                 src={bannerItem.bg_img['url']}
-                fill
+                width={1534}
+                height={985}
                 alt="banner image"
-                cover
-                className="absolute w-full h-full top-0 left-0 "
+                className="absolute w-full h-full top-0 left-0 object-cover"
               />
-
             </div>
           ))
         }
@@ -135,9 +149,9 @@ export default function Home({ banner, banner_list, up_arrow }) {
                   width={24}
                   height={24}
                   alt="up arrow"
-                  className="ml-auto mr-auto block h-[24px]"
+                  className="ml-auto mr-auto block h-[24px] opacity-30 group-hover:opacity-100"
                 />
-                <p className="text-white font-opensans text-[28px] leading-[18px] font-semibold mt-[11px]">{item.title}</p>
+                <p className="text-white font-opensans text-[24px] leading-[18px] font-semibold mt-[11px]">{item.title}</p>
               </div>
             </Link>
           ))}

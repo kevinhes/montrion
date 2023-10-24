@@ -22,7 +22,7 @@ export const HeaderPageElement = ( { logo } ) => {
   return (
     <>
     <div className='bg-[#222727]'>
-      <div className='mx-auto max-w-[327px] md:max-w-[1291px] flex justify-between items-center h-[70px] md:h-[97px]'>
+      <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1291px] flex justify-between items-center h-[70px] md:h-[97px]'>
         <div>
         <Link href="/" className='w-[135px] h-[15px] md:w-[189px] md:h-[21px] overflow-hidden flex'>
           <Image
@@ -38,8 +38,8 @@ export const HeaderPageElement = ( { logo } ) => {
             className="hidden md:flex items-center h-full text-white font-opensans text-[20px] leading-[18px]"
             onMouseEnter={() => filterChangeEnter()}
             onMouseLeave={() => filterChangeLeave()}>
-            <div className="flex h-full px-[30px] mr-[10px] cursor-pointer items-center relative group">
-              <p className='mr-[10px]'>About us</p>
+            <div className="flex h-full px-[30px] mr-[10px] items-center relative group">
+              <p className='mr-[10px] cursor-pointer'>About us</p>
               <Image src="/images/ExpandArrowdown.png" alt="arrow" width={15} height={15} className="group-hover:rotate-180 transition" />
               <div
                 className="absolute top-[97px] right-[130px] translate-x-1/2 opacity-0
@@ -70,15 +70,15 @@ export const HeaderPageElement = ( { logo } ) => {
                 </div>
               </div>
             </div>
-            <div className="flex h-full px-[30px] mr-[10px] cursor-pointer items-center relative group">
-              <p className='mr-[10px]'>Investment</p>
+            <div className="flex h-full px-[30px] mr-[10px] items-center relative group">
+              <p className='mr-[10px] cursor-pointer'>Investment</p>
               <Image src="/images/ExpandArrowdown.png" alt="arrow" width={15} height={15} className="group-hover:rotate-180 transition" />
               <div
                 className="absolute top-[97px] right-[130px] translate-x-1/2 opacity-0
                 group-hover:opacity-100 transition-opacity duration-300 z-50
                 shadow-[0px_4px_20px_rgba(0,0,0,0.25)] -translate-y-96 group-hover:-translate-y-0">
                 <div className="flex">
-                  <div className='w-[348px] h-[173px] bg-[#606060]'>
+                  <div className='w-[348px] h-[173px] bg-[#606060] flex items-center justify-center'>
                     <p className="text-white pt-[38px] pl-[40px] pr-[41px] font-opensans text-[22px] leading-[30px]">
                       Investing with integrity.
                     </p>
@@ -131,7 +131,7 @@ export const HeaderPageElement = ( { logo } ) => {
               <Link href='/overview' className="">
                 <div className="bg-[#606060]">
                   <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
-                    OverView
+                    Overview
                   </div>
                 </div>
               </Link>
