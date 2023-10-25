@@ -54,11 +54,16 @@ export async function getStaticProps() {
 export default function Home({ banner, banner_list, up_arrow }) {
   const [activeBanner, setActiveBanner] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
+  const [hoveredTab, setHoveredTab] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if ( !isHovering ) {
-        setActiveBanner((prevBanner) => (prevBanner + 1) % banner_list.length);
+        setActiveBanner((prevBanner) => {
+          const newBanner = (prevBanner + 1) % banner_list.length;
+          setHoveredTab(newBanner - 1);
+          return newBanner;
+      });      
       }
     }, 3000);
   
@@ -72,9 +77,11 @@ export default function Home({ banner, banner_list, up_arrow }) {
       e.preventDefault();
       setActiveBanner(index);
       setIsHovering(true);
+      setHoveredTab(null);
     } else {
       setActiveBanner(index);
       setIsHovering(true);
+      setHoveredTab(null);
     }
   }
 
@@ -147,13 +154,13 @@ export default function Home({ banner, banner_list, up_arrow }) {
         }
       </div>
       {/* banner switch */}
-      <div className="absolute bottom-0 hidden md:flex justify-between w-full items-end z-20">
+      <div className="absolute bottom-0 hidden md:flex justify-between w-full items-end z-20 h-[120px] overflow-hidden">
       {banner_list.filter((_, index) => index <= 3 && index > 0).map((item, index) => (
         <Link href={routeMapping[index]}
           key={index} 
-          className={`w-1/3 h-[50px] py-[13px] flex justify-center hover:h-[120px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
+          className={`select-tab w-1/3 h-[50px] py-[13px] flex justify-center ${index === hoveredTab ? "active" : ""} hover:h-[120px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
           onMouseEnter={(e) => bgChangeEnter(e,index + 1)}
-          onMouseLeave={bgChangeLeave}> 
+          onMouseLeave={bgChangeLeave}>
           <div className="h-6 overflow-hidden group-hover:h-[60px]">
             <Image
               src={up_arrow['url']}
@@ -171,7 +178,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
         {banner_list.filter((_, index) => index <= 3 && index > 0).map((item, index) => (
             <Link href={routeMapping[index]}
               key={index} 
-              className={`w-1/3 h-[48px] py-[15px] flex justify-center hover:items-center hover:h-[60px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
+              className={`select-tab w-1/3 h-[48px] py-[15px] flex justify-center hover:items-center hover:h-[60px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
               onClick={(e) => bgChangeEnter(e,index + 1)}>
               <div className="overflow-hidden">
                 <Image

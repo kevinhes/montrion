@@ -119,10 +119,10 @@ export default function OverView({ banner, smBanner }) {
                 </textarea>
               </div>
               <div className="md:mb-[30px] mb-[24px] flex justify-center">
-                <ReCAPTCHA
+                {/* <ReCAPTCHA
                   sitekey="6Lc0xcYoAAAAANHFYwl84WGf7MVwJUycYJ0P8QGH"
                   onChange={handleCaptchaChange}
-                />
+                /> */}
               </div>
               <div className="flex justify-center"> 
                 <input type="submit" value="Submit" className='md:py-[27px] py-[14px] md:px-[60px] px-[30px]

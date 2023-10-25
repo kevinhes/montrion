@@ -57,7 +57,7 @@
 }
 
 .link-hover span{
-  transition: all .3s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 .link-hover:hover span {margin-right: 20px;}
@@ -81,4 +81,20 @@
   transform: translateY(-100%);
   transition: all 1s ease-in-out;
   top: 0;
+}
+
+.select-tab{
+  transition: height 1s ease-in-out;
+}
+
+.select-tab.active{
+  height: 120px;
+}
+
+.select-tab.active > div{
+  height: 60px;
+}
+
+.select-tab.active > div > img{
+  opacity: 1;
 }

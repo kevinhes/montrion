@@ -63,10 +63,10 @@ export const HeaderElement = ( { logo } ) => {
             onMouseLeave={() => filterChangeLeave()}>
             <div className="flex h-full px-[30px] mr-[10px] items-center relative group">
               <p className='mr-[10px] cursor-pointer'>About us</p>
-              <Image src="/images/ExpandArrowdown.png" alt="arrow" width={15} height={15} className="group-hover:rotate-180 transition" />
+              <Image src="/images/ExpandArrowdown.png" alt="arrow" width={15} height={15} className="group-hover:rotate-180 transition duration-1000" />
               <div
                 className="absolute top-[97px] right-[130px] translate-x-1/2 opacity-0
-                group-hover:opacity-100 transition-opacity duration-300 z-50
+                group-hover:opacity-100 transition-opacity duration-1000 z-50
                 shadow-[0px_4px_20px_rgba(0,0,0,0.25)] -translate-y-96 group-hover:-translate-y-0">
                 <div className="flex">
                   <div className='w-[348px] h-[173px] bg-[#606060]'>
@@ -95,10 +95,10 @@ export const HeaderElement = ( { logo } ) => {
             </div>
             <div className="flex h-full px-[30px] mr-[10px] items-center relative group">
               <p className='mr-[10px] cursor-pointer'>Investment</p>
-              <Image src="/images/ExpandArrowdown.png" alt="arrow" width={15} height={15} className="group-hover:rotate-180 transition" />
+              <Image src="/images/ExpandArrowdown.png" alt="arrow" width={15} height={15} className="group-hover:rotate-180 transition duration-1000" />
               <div
                 className="absolute top-[97px] right-[130px] translate-x-1/2 opacity-0
-                group-hover:opacity-100 transition-opacity duration-300 z-50
+                group-hover:opacity-100 transition-opacity duration-1000 z-50
                 shadow-[0px_4px_20px_rgba(0,0,0,0.25)] -translate-y-96 group-hover:-translate-y-0">
                 <div className="flex">
                   <div className='w-[348px] h-[173px] bg-[#606060] flex items-center justify-center'>
