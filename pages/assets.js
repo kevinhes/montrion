@@ -4,12 +4,12 @@ import axios from "axios";
 import { FooterElement } from '../components/Footer'
 
 
-export default function OverView({ title, subtitle, content, asideImg }) {
+export default function OverView({ title, subtitle, content, asideImg, smAsideImg }) {
   return (
     <div>
       <HeaderPageElement></HeaderPageElement>
       <div className='md:pt-[92px] pt-[30px] md:pb-[365px] relative'>
-        <div className='max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1291px] mx-auto'>
+        <div className='max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px] mx-auto'>
           <div className="md:flex flex-col items-end">
             <h3 className='md:w-[58%] text-[#2E4E4C] font-opensans
             md:text-[20px] text-[12px] md:leading-[36px] tracking-[2px] font-normal
@@ -23,8 +23,11 @@ export default function OverView({ title, subtitle, content, asideImg }) {
             <p className='hidden md:block text-[#723C3F] w-[58%] font-opensans text-[24px] opacity-70' dangerouslySetInnerHTML={{ __html: content }} />
           </div>
         </div>
-        <div className="md:absolute left-0 top-0 md:h-full md:w-[35%] h-[250px] mb-[30px] md:mb-0">
+        <div className="hidden md:block md:absolute left-0 top-0 md:h-full md:w-[35%] h-[250px] mb-[30px] md:mb-0">
           <Image src={asideImg.url} width={527} height={845} alt='aside image' className='w-full h-full object-cover' />
+        </div>
+        <div className="md:hidden md:absolute left-0 top-0 md:h-full md:w-[35%] h-[250px] mb-[30px] md:mb-0">
+          <Image src={smAsideImg.url} width={375} height={250} alt='aside image' className='w-full h-full object-cover' />
         </div>
         <p className='md:hidden text-[#723C3F] font-opensans
         md:text-[24px] text-[15px] opacity-70
@@ -43,18 +46,18 @@ export async function getStaticProps() {
     );
 
     // 解构响应中的数据
-    const { title, subtitle, content, asideImg } = response.data;
+    const { title, subtitle, content, asideImg, smAsideImg } = response.data;
 
     return {
       props: {
-        title, subtitle, content, asideImg
+        title, subtitle, content, asideImg, smAsideImg
       },
     };
   } catch (error) {
     console.error("Error fetching home page content:", error);
     return {
       props: {
-        title, subtitle, content, asideImg
+        title, subtitle, content, asideImg, smAsideImg
       },
     };
   }

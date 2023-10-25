@@ -18,7 +18,7 @@ export default function OverView({ bannerGroup, contentList }) {
               {bannerGroup.title}
             </h3>
             <p className='text-[#723C3F] md:text-white
-            md:w-[665px] font-crimson md:text-[36px] text-[20px] md:leading-[45px] leading-[22px] font-bold' dangerouslySetInnerHTML={{ __html: bannerGroup.content }} />
+            md:w-[665px] font-crimson md:text-[30px] text-[20px] md:leading-[42px] leading-[22px] font-bold' dangerouslySetInnerHTML={{ __html: bannerGroup.content }} />
           </div>
         </div>
         <div className="hidden md:block absolute w-full h-full top-0 left-0">
@@ -33,7 +33,7 @@ export default function OverView({ bannerGroup, contentList }) {
           contentList.map((item, index) => {
             const finalClass = index === contentList.length - 1 ? '' : 'md:mb-[50px] mb-[36px]';
             return (
-              <div className={`mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1291px]  ${finalClass}`} key={index}>
+              <div className={`mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px]  ${finalClass}`} key={index}>
                 <div className='md:w-[78%]'>
                   <h2 className='text-[#723C3F] font-crimson md:text-[32px] md:leading-[35px] font-bold md:mb-[20px] mb-[10px]'>
                     {item.title}

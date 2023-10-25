@@ -1,12 +1,14 @@
-import React , { useState } from "react";
+import React , { useState, useEffect, useRef } from "react";
 import Link from 'next/link';
 import Image from 'next/image'
 
 // import React , { useState } from "react";
 
 export const HeaderElement = ( { logo } ) => {
+  const menuRef = useRef(null);
   const [ activeFilter, setActiveFilter ] = useState(0);
   const [ activeMenu, setActiveMenu ] = useState(0);
+  const [ leaveMenu, setLeaveMenu ] = useState(0);
   function filterChangeEnter() {
     setActiveFilter(1);
   }
@@ -15,14 +17,35 @@ export const HeaderElement = ( { logo } ) => {
   }
 
   function menuActive(trigger) {
-    console.log(trigger);
     setActiveMenu(trigger);
   }
+
+  function menuLeave(trigger) {
+    setLeaveMenu(trigger);
+  }
+
+  useEffect(() => {
+    const menuElem = menuRef.current;
+    
+    const handleTransitionEnd = () => {
+      // 当动画结束时，将`leaveMenu`设置为false
+      setLeaveMenu(false);
+    };
+  
+    // 添加事件监听器
+    menuElem && menuElem.addEventListener('transitionend', handleTransitionEnd);
+    
+    // 在组件卸载时，清除监听器
+    return () => {
+      menuElem && menuElem.removeEventListener('transitionend', handleTransitionEnd);
+    };
+  }, []);
+  
   // console.log(logo);
   return (
     <>
       <div className='fixed z-50 left-0 right-0 bg-[#222727] overflow-hidden md:overflow-visible'>
-        <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1291px] flex justify-between items-center h-[70px] md:h-[97px]'>
+        <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px] flex justify-between items-center h-[70px] md:h-[97px]'>
           <div>
             <Link href="/" className='w-[135px] h-[15px] md:w-[189px] md:h-[21px] overflow-hidden flex'>
               <Image
@@ -58,7 +81,7 @@ export const HeaderElement = ( { logo } ) => {
                       <span className='mr-[10px]'>
                         Overview
                       </span>
-                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} class="" />
+                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} />
                     </Link>
                     <Link href="/history" className="link-hover bg-[#ECECEC] h-[86px] py-[34px] pl-[87px] flex hover:bg-[#E2E2E2]">
                       <span className='mr-[10px]'>
@@ -104,83 +127,92 @@ export const HeaderElement = ( { logo } ) => {
               <p>Contact</p>
             </Link>
           </div>
-          <div onClick={() => {menuActive(1)}} className={`md:hidden ${activeMenu === 1 ? 'hidden' : ''}`}>
+          <div onClick={() => {menuActive(1);}} className={`md:hidden ${activeMenu === 1 ? 'hidden' : ''}`}>
             <Image src='/images/Menu.png' width={24} height={24} alt="trigger" />
           </div>
-          <div onClick={() => {menuActive(0)}} className={`${activeMenu === 1 ? '' : 'hidden'} md:hidden`}>
+          <div onClick={() => {menuActive(0); menuLeave(1)}} className={`${activeMenu === 1 ? '' : 'hidden'} md:hidden`}>
             <Image src='/images/close.png' width={24} height={24} alt="trigger" />
           </div>
         </div>
       </div>
       <div className={`full-screen-overlay ${ activeFilter === 1 ? 'active' : '' }`}></div>
-      <div className={`fixed top-[70px] left-0 border-t border-[#ffffff26]
-      w-full h-screen bg-[#222727] transition-all md:hidden
-      z-[100] ${activeMenu === 1 ? 'translate-x-0': '-translate-x-full'}`}>
-        <div className="font-opensans text-white">
-          <div className="group">
-            <div className="max-w-[327px] mx-auto flex justify-between items-center py-5">
-              <p className="text-white text-[16px] leading-normal">About</p>
-              <div>
-                <Image src='/images/expandarrow.png' width={22} height={18} alt=""
-                className="group-hover:rotate-180" />
+      <div ref={menuRef} className={`off-canvas border-t border-[#ffffff26] bg-[#222727] md:hidden
+        ${activeMenu === 1 ? 'active': ''} ${leaveMenu === 1 ? 'leave': ''} `}>
+        <div className="flex flex-col justify-between h-full">
+          <div>
+            <div className="font-opensans text-white">
+              <div className="group">
+                <div className="max-w-[327px] mx-auto flex justify-between items-center py-5">
+                  <p className="text-white text-[16px] leading-normal">About</p>
+                  <div>
+                    <Image src='/images/expandarrow.png' width={22} height={18} alt=""
+                    className="group-hover:rotate-180" />
+                  </div>
+                </div>
+                <div className="overflow-hidden max-h-0 group-hover:max-h-[500px]">
+                  <p className="max-w-[327px] mx-auto text-[15px] font-opensans text-white mb-[19px]">
+                    An investment holding company rooted in integrity and resilience.
+                  </p>
+                  <Link href='/overview' className="">
+                    <div className="bg-[#606060]">
+                      <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
+                        Overview
+                      </div>
+                    </div>
+                  </Link>
+                  <Link href='/history' className="">
+                    <div className="bg-[#606060]">
+                      <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
+                        History
+                      </div>
+                    </div>
+                  </Link>
+                </div>
               </div>
             </div>
-            <div className="overflow-hidden max-h-0 group-hover:max-h-[500px]">
-              <p className="max-w-[327px] mx-auto text-[15px] font-opensans text-white mb-[19px]">
-                An investment holding company rooted in integrity and resilience.
-              </p>
-              <Link href='/overview' className="">
-                <div className="bg-[#606060]">
-                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
-                    Overview
+            <div className="font-opensans text-white">
+              <div className="group">
+                <div className="max-w-[327px] mx-auto flex justify-between items-center py-5">
+                  <p className="text-white text-[16px] leading-normal">Investment</p>
+                  <div>
+                    <Image src='/images/expandarrow.png' width={22} height={18} alt=""
+                    className="group-hover:rotate-180" />
                   </div>
                 </div>
-              </Link>
-              <Link href='/history' className="">
-                <div className="bg-[#606060]">
-                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
-                    History
-                  </div>
+                <div className="overflow-hidden max-h-0 group-hover:max-h-[500px]">
+                  <p className="max-w-[327px] mx-auto text-[15px] font-opensans text-white mb-[19px]">
+                  Investing with integrity.
+                  </p>
+                  <Link href='/management' className="">
+                    <div className="bg-[#606060]">
+                      <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
+                        Managment
+                      </div>
+                    </div>
+                  </Link>
+                  <Link href='/assets' className="">
+                    <div className="bg-[#606060]">
+                      <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
+                        Assets
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="font-opensans text-white">
-          <div className="group">
-            <div className="max-w-[327px] mx-auto flex justify-between items-center py-5">
-              <p className="text-white text-[16px] leading-normal">Investment</p>
-              <div>
-                <Image src='/images/expandarrow.png' width={22} height={18} alt=""
-                className="group-hover:rotate-180" />
               </div>
             </div>
-            <div className="overflow-hidden max-h-0 group-hover:max-h-[500px]">
-              <p className="max-w-[327px] mx-auto text-[15px] font-opensans text-white mb-[19px]">
-              Investing with integrity.
-              </p>
-              <Link href='/management' className="">
-                <div className="bg-[#606060]">
-                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
-                    Managment
-                  </div>
-                </div>
-              </Link>
-              <Link href='/assets' className="">
-                <div className="bg-[#606060]">
-                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
-                    Assets
-                  </div>
-                </div>
-              </Link>
+            <div className="font-opensans text-white">
+              <div className="group">
+                <Link href='/contact' className="max-w-[327px] mx-auto flex justify-between items-center py-5">
+                  <p className="text-white text-[16px] leading-normal">Contact</p>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="font-opensans text-white">
-          <div className="group">
-            <Link href='/contact' className="max-w-[327px] mx-auto flex justify-between items-center py-5">
-              <p className="text-white text-[16px] leading-normal">Contact</p>
-            </Link>
+          <div className="text-white pb-[51px] opacity-40 text-[12px] font-opensans">
+            <div className="max-w-[327px] mx-auto">
+              <p className="mb-[3px]">Terms of Use | <Link href='/privacy'>Privacy & Policy</Link> </p>
+              <p>Montrion Corporation © Copyright 2023</p>
+            </div>
           </div>
         </div>
       </div>

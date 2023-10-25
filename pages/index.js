@@ -52,7 +52,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ banner, banner_list, up_arrow }) {
-  const [activeBanner, setActiveBanner] = useState(null);
+  const [activeBanner, setActiveBanner] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
     setIsHovering(false);
   }
   
-  const routeMapping = ['/history', '/assets', '/contact']
+  const routeMapping = ['/history', '/assets', '/contact', '/']
   return (
     <div className="relative">
       <HeaderElement></HeaderElement>
@@ -105,17 +105,21 @@ export default function Home({ banner, banner_list, up_arrow }) {
             width={1534}
             height={985}
             alt="bannner image"
-            className='w-full h-full object-cover'/>
+            className='hidden md:block w-full h-full object-cover'/>
+          <Image
+            src={banner.sm_banner_img['url']}
+            width={375}
+            height={646}
+            alt="bannner image"
+            className='md:hidden w-full h-full object-cover'/>
         </div>
         {
           banner_list.map((bannerItem, index) => (
-            <div key={index} className={`absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-300 z-20 ${activeBanner === index ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
+            <div key={index} className={`absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-1000 z-20 ${activeBanner === index ? 'opacity-100' : 'opacity-0'}`}>
               <div className="relative z-10">
                 <h2 className="text text-white text-center font-crimsontext w-[303px] md:w-[905px] mb-5 md:mb-0
                 text-[32px] leading-[42px]
-                md:text-[55px] md:leading-[68px]">
-                  {bannerItem.content}
-                </h2>
+                md:text-[55px] md:leading-[68px]" dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
                 <div className="flex justify-center">
                   <Link href={routeMapping[index]}
                     className="md:hidden block py-[14px] px-[30px]
@@ -129,7 +133,14 @@ export default function Home({ banner, banner_list, up_arrow }) {
                 width={1534}
                 height={985}
                 alt="banner image"
-                className="absolute w-full h-full top-0 left-0 object-cover"
+                className="absolute w-full h-full top-0 left-0 object-cover hidden md:block"
+              />
+              <Image
+                src={bannerItem.sm_background_img['url']}
+                width={375}
+                height={646}
+                alt="banner image"
+                className="absolute w-full h-full top-0 left-0 object-cover md:hidden"
               />
             </div>
           ))
@@ -137,31 +148,31 @@ export default function Home({ banner, banner_list, up_arrow }) {
       </div>
       {/* banner switch */}
       <div className="absolute bottom-0 hidden md:flex justify-between w-full items-end z-20">
-        {banner_list.map((item, index) => (
-            <Link href={routeMapping[index]}
-              key={index} 
-              className={`w-1/3 h-[50px] py-[13px] flex justify-center hover:h-[120px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
-              onMouseEnter={(e) => bgChangeEnter(e,index)}
-              onMouseLeave={bgChangeLeave}> 
-              <div className="h-6 overflow-hidden group-hover:h-[60px]">
-                <Image
-                  src={up_arrow['url']}
-                  width={24}
-                  height={24}
-                  alt="up arrow"
-                  className="ml-auto mr-auto block h-[24px] opacity-30 group-hover:opacity-100"
-                />
-                <p className="text-white font-opensans text-[24px] leading-[18px] font-semibold mt-[11px]">{item.title}</p>
-              </div>
-            </Link>
-          ))}
+      {banner_list.filter((_, index) => index <= 3 && index > 0).map((item, index) => (
+        <Link href={routeMapping[index]}
+          key={index} 
+          className={`w-1/3 h-[50px] py-[13px] flex justify-center hover:h-[120px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
+          onMouseEnter={(e) => bgChangeEnter(e,index + 1)}
+          onMouseLeave={bgChangeLeave}> 
+          <div className="h-6 overflow-hidden group-hover:h-[60px]">
+            <Image
+              src={up_arrow['url']}
+              width={24}
+              height={24}
+              alt="up arrow"
+              className="ml-auto mr-auto block h-[24px] opacity-30 group-hover:opacity-100"
+            />
+            <p className="text-white font-opensans text-[24px] leading-[18px] font-semibold mt-[11px]">{item.title}</p>
+          </div>
+        </Link>
+      ))}
       </div>
       <div className="absolute bottom-0 flex md:hidden justify-between w-full items-end z-20">
-        {banner_list.map((item, index) => (
+        {banner_list.filter((_, index) => index <= 3 && index > 0).map((item, index) => (
             <Link href={routeMapping[index]}
               key={index} 
               className={`w-1/3 h-[48px] py-[15px] flex justify-center hover:items-center hover:h-[60px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
-              onClick={(e) => bgChangeEnter(e,index)}>
+              onClick={(e) => bgChangeEnter(e,index + 1)}>
               <div className="overflow-hidden">
                 <Image
                   src={up_arrow['url']}

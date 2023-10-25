@@ -61,3 +61,24 @@
 }
 
 .link-hover:hover span {margin-right: 20px;}
+
+.off-canvas {
+  position: fixed;
+  top: 70px;
+  height: calc(100vh - 70px);
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  transform: translateY(100%);
+}
+
+.off-canvas.active {
+  transition: all 1s ease-in-out;
+  transform: translateY(0%);
+}
+
+.off-canvas.leave {
+  transform: translateY(-100%);
+  transition: all 1s ease-in-out;
+  top: 0;
+}

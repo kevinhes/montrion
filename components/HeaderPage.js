@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image'
-import React , { useState } from "react";
+import React , { useState, useEffect, useRef } from "react";
 
 // import React , { useState } from "react";
 
 export const HeaderPageElement = ( { logo } ) => {
+  const menuRef = useRef(null);
   const [ activeFilter, setActiveFilter ] = useState(0);
   const [ activeMenu, setActiveMenu ] = useState(0);
+  const [ leaveMenu, setLeaveMenu ] = useState(0);
   function filterChangeEnter() {
     setActiveFilter(1);
   }
@@ -15,14 +17,34 @@ export const HeaderPageElement = ( { logo } ) => {
   }
 
   function menuActive(trigger) {
-    console.log(trigger);
     setActiveMenu(trigger);
   }
+
+  function menuLeave(trigger) {
+    setLeaveMenu(trigger);
+  }
+
+  useEffect(() => {
+    const menuElem = menuRef.current;
+    
+    const handleTransitionEnd = () => {
+      // 当动画结束时，将`leaveMenu`设置为false
+      setLeaveMenu(false);
+    };
+  
+    // 添加事件监听器
+    menuElem && menuElem.addEventListener('transitionend', handleTransitionEnd);
+    
+    // 在组件卸载时，清除监听器
+    return () => {
+      menuElem && menuElem.removeEventListener('transitionend', handleTransitionEnd);
+    };
+  }, []);
   // console.log(logo);
   return (
     <>
     <div className='bg-[#222727]'>
-      <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1291px] flex justify-between items-center h-[70px] md:h-[97px]'>
+      <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px] flex justify-between items-center h-[70px] md:h-[97px]'>
         <div>
         <Link href="/" className='w-[135px] h-[15px] md:w-[189px] md:h-[21px] overflow-hidden flex'>
           <Image
@@ -47,7 +69,7 @@ export const HeaderPageElement = ( { logo } ) => {
                 shadow-[0px_4px_20px_rgba(0,0,0,0.25)] -translate-y-96 group-hover:-translate-y-0">
                 <div className="flex">
                   <div className='w-[348px] h-[173px] bg-[#606060]'>
-                    <p className="text-white pt-[38px] pl-[40px] pr-[41px] font-opensans text-[22px] leading-[30px]">
+                    <p className="text-white pt-[38px] pl-[40px] pr-[41px] font-opensans text-[20px] leading-[30px]">
                       An investment holding company rooted in integrity and resilience.
                     </p>
                   </div>
@@ -58,7 +80,7 @@ export const HeaderPageElement = ( { logo } ) => {
                       <span className='mr-[10px]'>
                         Overview
                       </span>
-                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} class="" />
+                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} />
                     </Link>
                     <Link href="/history" className="link-hover bg-[#ECECEC] h-[86px] py-[34px] pl-[87px] flex hover:bg-[#E2E2E2]">
                       <span className='mr-[10px]'>
@@ -79,7 +101,7 @@ export const HeaderPageElement = ( { logo } ) => {
                 shadow-[0px_4px_20px_rgba(0,0,0,0.25)] -translate-y-96 group-hover:-translate-y-0">
                 <div className="flex">
                   <div className='w-[348px] h-[173px] bg-[#606060] flex items-center justify-center'>
-                    <p className="text-white pt-[38px] pl-[40px] pr-[41px] font-opensans text-[22px] leading-[30px]">
+                    <p className="text-white flex justify-center items-center font-opensans text-[20px] leading-[30px]">
                       Investing with integrity.
                     </p>
                   </div>
@@ -107,14 +129,14 @@ export const HeaderPageElement = ( { logo } ) => {
         <div onClick={() => {menuActive(1)}} className={`md:hidden ${activeMenu === 1 ? 'hidden' : ''}`}>
           <Image src='/images/Menu.png' width={24} height={24} alt="trigger" />
         </div>
-        <div onClick={() => {menuActive(0)}} className={`${activeMenu === 1 ? '' : 'hidden'} md:hidden`}>
+        <div onClick={() => {menuActive(0); menuLeave(1)}} className={`${activeMenu === 1 ? '' : 'hidden'} md:hidden`}>
           <Image src='/images/close.png' width={24} height={24} alt="trigger" />
         </div>
       </div>
     </div>
-    <div className={`fixed top-[70px] left-0 border-t border-[#ffffff26]
-      w-full h-screen bg-[#222727] transition-all md:hidden
-      z-[100] ${activeMenu === 1 ? 'translate-x-0': '-translate-x-full'}`}>
+    <div className={`full-screen-overlay ${ activeFilter === 1 ? 'active' : '' }`}></div>
+    <div ref={menuRef} className={`off-canvas border-t border-[#ffffff26] bg-[#222727] md:hidden
+        ${activeMenu === 1 ? 'active': ''} ${leaveMenu === 1 ? 'leave': ''} `}>
         <div className="font-opensans text-white">
           <div className="group">
             <div className="max-w-[327px] mx-auto flex justify-between items-center py-5">

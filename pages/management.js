@@ -9,7 +9,7 @@ export default function OverView({ title, subtitle, content, asideImg, smAsideIm
     <div>
       <HeaderPageElement></HeaderPageElement>
       <div className='md:pt-[91px] pt-[30px] md:pb-[233px] relative'>
-        <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1291px]'>
+        <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px]'>
           <h3 className='md:w-[55%] text-[#2E4E4C]
           font-opensans md:text-[20px] text-[12px] md:leading-[36px]
           leading-normal tracking-[2px] font-normal md:pb-[11px] pb-[10px]
