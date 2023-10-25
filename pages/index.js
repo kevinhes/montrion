@@ -150,7 +150,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
                 width={375}
                 height={646}
                 alt="banner image"
-                className="absolute w-full h-full top-0 left-0 object-cover md:hidden"
+                className="absolute w-full h-full top-0 left-0 object-cover object-bottom md:hidden"
               />
             </div>
           ))
