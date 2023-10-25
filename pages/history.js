@@ -22,7 +22,7 @@ export default function OverView({ bannerGroup, contentList }) {
           </div>
         </div>
         <div className="hidden md:block absolute w-full h-full top-0 left-0">
-          <Image src={bannerGroup.bg_img.url} width={1524} height={730} className='w-full h-full object-cover' alt="" />
+          <Image src={bannerGroup.bg_img.url} width={1524} height={730} className='w-full h-full object-cover object-left-top' alt="" />
         </div>
         <div className="md:hidden w-full h-full top-0 left-0">
           <Image src={bannerGroup.sm_bg_img.url} width={614} height={421} className='w-full h-full object-cover' alt="" />

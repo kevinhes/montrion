@@ -55,6 +55,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
   const [activeBanner, setActiveBanner] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [hoveredTab, setHoveredTab] = useState(null);
+  const [sliding, setSliding] = useState(1);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -78,10 +79,12 @@ export default function Home({ banner, banner_list, up_arrow }) {
       setActiveBanner(index);
       setIsHovering(true);
       setHoveredTab(null);
+      setSliding(0);
     } else {
       setActiveBanner(index);
       setIsHovering(true);
       setHoveredTab(null);
+      setSliding(0);
     }
   }
 
@@ -92,11 +95,11 @@ export default function Home({ banner, banner_list, up_arrow }) {
   
   const routeMapping = ['/history', '/assets', '/contact', '/']
   return (
-    <div className="relative">
+    <div className="relative h-screen">
       <HeaderElement></HeaderElement>
       {/* banner */}
-      <div className="relative flex justify-center items-center w-screen h-screen overflow-hidden">
-        <div className="relative z-10">
+      <div className={`relative flex justify-center items-center h-full overflow-hidden`}>
+        <div className={`relative z-10 ${sliding === 1 ? 'hidden' : ''}`}>
           <div className="w-[303px] md:w-[728px]">
             <h2
               className="text-white text-center font-crimsontext font-semibold
@@ -106,7 +109,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
             </h2>
           </div>
         </div>
-        <div className="absolute w-full h-full top-0 left-0">
+        <div className={`absolute w-full h-full top-0 left-0 ${sliding === 1 ? 'hidden opacity-30' : ''}`}>
           <Image
             src={banner.banner_img['url']}
             width={1534}
@@ -124,9 +127,9 @@ export default function Home({ banner, banner_list, up_arrow }) {
           banner_list.map((bannerItem, index) => (
             <div key={index} className={`absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-1000 z-20 ${activeBanner === index ? 'opacity-100' : 'opacity-0'}`}>
               <div className="relative z-10">
-                <h2 className="text text-white text-center font-crimsontext w-[303px] md:w-[905px] mb-5 md:mb-0
-                text-[32px] leading-[42px]
-                md:text-[55px] md:leading-[68px]" dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
+                <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[905px] mb-5 md:mb-0
+                text-[32px] leading-[42px] ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
+                md:text-[55px] md:leading-[68px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
                 <div className="flex justify-center">
                   <Link href={routeMapping[index]}
                     className="md:hidden block py-[14px] px-[30px]
