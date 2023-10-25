@@ -95,7 +95,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
   
   const routeMapping = ['/history', '/assets', '/contact', '/']
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen pt-[70px]">
       <HeaderElement></HeaderElement>
       {/* banner */}
       <div className={`relative flex justify-center items-center h-full overflow-hidden`}>
