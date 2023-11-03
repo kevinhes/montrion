@@ -1,14 +1,25 @@
 import Link from 'next/link';
 import Image from 'next/image'
 import React , { useState, useEffect, useRef } from "react";
+import { useRouter } from 'next/router';
 
 // import React , { useState } from "react";
 
 export const HeaderPageElement = ( { logo } ) => {
   const menuRef = useRef(null);
+  const router = useRouter();
   const [ activeFilter, setActiveFilter ] = useState(0);
   const [ activeMenu, setActiveMenu ] = useState(0);
   const [ leaveMenu, setLeaveMenu ] = useState(0);
+
+  const pageReload = (e, path) => {
+    if (router.pathname === path) {
+      e.preventDefault();
+      // 强制导航到指定的路径，即使我们已经在那里了
+      router.reload();
+    }
+  };
+
   function filterChangeEnter() {
     setActiveFilter(1);
   }
@@ -44,7 +55,7 @@ export const HeaderPageElement = ( { logo } ) => {
   return (
     <>
     <div className='bg-[#222727]'>
-      <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px] flex justify-between items-center h-[70px] md:h-[97px]'>
+      <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px] flex justify-between items-center h-[70px] md:h-[55px]'>
         <div>
         <Link href="/" className='w-[135px] h-[15px] md:w-[189px] md:h-[21px] overflow-hidden flex'>
           <Image
@@ -57,66 +68,63 @@ export const HeaderPageElement = ( { logo } ) => {
         </Link>
         </div>
         <div
-            className="hidden md:flex items-center h-full text-white font-opensans text-[20px] leading-[18px]"
+            className="hidden md:flex items-center h-full text-white font-opensans text-[18px] leading-[18px]">
+            <div className="flex h-full px-[30px] mr-[10px] items-center relative group"
             onMouseEnter={() => filterChangeEnter()}
             onMouseLeave={() => filterChangeLeave()}>
-            <div className="flex h-full px-[30px] mr-[10px] items-center relative group">
               <p className='mr-[10px] cursor-pointer'>About us</p>
               <Image src="/images/ExpandArrowdown.png" alt="arrow" width={15} height={15} className="group-hover:rotate-180 transition duration-1000" />
               <div
-                className="absolute top-[97px] right-[130px] translate-x-1/2 opacity-0
-                group-hover:opacity-100 transition-opacity duration-1000 z-50
-                shadow-[0px_4px_20px_rgba(0,0,0,0.25)] -translate-y-96 group-hover:-translate-y-0">
-                <div className="flex">
-                  <div className='w-[348px] h-[173px] bg-[#606060]'>
-                    <p className="text-white pt-[38px] pl-[40px] pr-[41px] font-opensans text-[20px] leading-[30px]">
+                className="absolute top-[55px] right-[130px] translate-x-1/2 z-50
+                shadow-[0px_4px_20px_rgba(0,0,0,0.25)]">
+                <div className="flex h-[0px] overflow-hidden group-hover:h-[140px] transition-all duration-1000">
+                  <div className='w-[315px] bg-[#606060] flex justify-center items-center'>
+                    <p className="text-white pl-[35px] pr-[30px] font-opensans text-[18px] leading-normal">
                       An investment holding company rooted in integrity and resilience.
                     </p>
                   </div>
-                  <div className='w-[290px] text-[#222727]'>
-                    <Link href="/overview" className="relative bg-[#ECECEC] hover:bg-[#E2E2E2]
-                    h-[86px] py-[34px] pl-[87px] flex text-under-deco
-                    link-hover">
-                      <span className='mr-[10px]'>
+                  <div className='w-[250px] text-[#222727]'>
+                    <Link href="/overview" className="relative bg-[#ECECEC] hover:bg-[#E2E2E2] h-[70px] flex items-center justify-center text-under-deco link-hover">
+                      <span className='mr-[10px] text-[18px]'>
                         Overview
                       </span>
-                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} />
+                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} class="over-img relative" />
                     </Link>
-                    <Link href="/history" className="link-hover bg-[#ECECEC] h-[86px] py-[34px] pl-[87px] flex hover:bg-[#E2E2E2]">
-                      <span className='mr-[10px]'>
+                    <Link href="/history" className="link-hover relative bg-[#ECECEC] h-[70px] flex items-center justify-center hover:bg-[#E2E2E2]">
+                      <span className='mr-[10px] text-[18px]'>
                         History
                       </span>
-                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} />
+                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} class="over-img relative" />
                     </Link>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex h-full px-[30px] mr-[10px] items-center relative group">
+            <div className="flex h-full px-[30px] mr-[10px] items-center relative group"
+              onMouseEnter={() => filterChangeEnter()}
+              onMouseLeave={() => filterChangeLeave()}>
               <p className='mr-[10px] cursor-pointer'>Investment</p>
               <Image src="/images/ExpandArrowdown.png" alt="arrow" width={15} height={15} className="group-hover:rotate-180 transition duration-1000" />
               <div
-                className="absolute top-[97px] right-[130px] translate-x-1/2 opacity-0
-                group-hover:opacity-100 transition-opacity duration-1000 z-50
-                shadow-[0px_4px_20px_rgba(0,0,0,0.25)] -translate-y-96 group-hover:-translate-y-0">
-                <div className="flex">
-                  <div className='w-[348px] h-[173px] bg-[#606060] flex items-center justify-center'>
-                    <p className="text-white flex justify-center items-center font-opensans text-[20px] leading-[30px]">
+                className="absolute top-[55px] right-[130px] translate-x-1/2 z-50 shadow-[0px_4px_20px_rgba(0,0,0,0.25)]">
+                <div className="flex h-[0px] overflow-hidden group-hover:h-[140px] transition-all duration-1000">
+                  <div className='w-[315px] bg-[#606060] flex items-center justify-center'>
+                    <p className="text-white font-opensans text-[18px] leading-normal pl-[35px] pr-[30px]">
                       Investing with integrity.
                     </p>
                   </div>
-                  <div className='w-[290px] text-[#222727]'>
-                    <Link href="/management" className="link-hover relative bg-[#ECECEC] hover:bg-[#E2E2E2] h-[86px] py-[34px] pl-[87px] flex text-under-deco">
+                  <div className='w-[250px] text-[#222727]'>
+                    <Link href="/management" className="link-hover relative bg-[#ECECEC] hover:bg-[#E2E2E2] h-[70px] flex items-center justify-center text-under-deco">
                       <span className='mr-[10px]'>
                         Management
                       </span>
-                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} />
+                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} class="over-img relative" />
                     </Link>
-                    <Link href="/assets" className="link-hover bg-[#ECECEC] h-[86px] py-[34px] pl-[87px] flex hover:bg-[#E2E2E2]">
+                    <Link href="/assets" className="link-hover relative bg-[#ECECEC] h-[70px] flex items-center justify-center hover:bg-[#E2E2E2]">
                       <span className='mr-[10px]'>
                         Assets
                       </span>
-                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} />
+                      <Image src='/images/Forward.png' alt="arrow" width={16} height={16} class="over-img relative" />
                     </Link>
                   </div>
                 </div>
@@ -134,13 +142,13 @@ export const HeaderPageElement = ( { logo } ) => {
         </div>
       </div>
     </div>
-    <div className={`full-screen-overlay ${ activeFilter === 1 ? 'active' : '' }`}></div>
+    <div className={`full-screen-overlay ${ activeFilter === 1 ? 'active' : 'deactivate' }`}></div>
     <div ref={menuRef} className={`off-canvas border-t border-[#ffffff26] bg-[#222727] md:hidden
         ${activeMenu === 1 ? 'active': ''} ${leaveMenu === 1 ? 'leave': ''} `}>
-        <div className="font-opensans text-white">
-          <div className="group">
+        <div className="font-opensans text-white overflow-hidden">
+          <div className={`group mobile-menu-ani ${activeMenu === 1 ? 'active': ''}`}>
             <div className="max-w-[327px] mx-auto flex justify-between items-center py-5">
-              <p className="text-white text-[16px] leading-normal">About</p>
+              <p className="text-white text-[16px] leading-normal font-semibold">About</p>
               <div>
                 <Image src='/images/expandarrow.png' width={22} height={18} alt=""
                 className="group-hover:rotate-180" />
@@ -150,16 +158,16 @@ export const HeaderPageElement = ( { logo } ) => {
               <p className="max-w-[327px] mx-auto text-[15px] font-opensans text-white mb-[19px]">
                 An investment holding company rooted in integrity and resilience.
               </p>
-              <Link href='/overview' className="">
+              <Link href='/overview' className="" onClick={( e ) => pageReload(e,'/overview')}>
                 <div className="bg-[#606060]">
-                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
+                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px] text-[14px]">
                     Overview
                   </div>
                 </div>
               </Link>
-              <Link href='/history' className="">
+              <Link href='/history' className="" onClick={( e ) => pageReload(e,'/history')}>
                 <div className="bg-[#606060]">
-                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
+                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px] text-[14px]">
                     History
                   </div>
                 </div>
@@ -167,10 +175,10 @@ export const HeaderPageElement = ( { logo } ) => {
             </div>
           </div>
         </div>
-        <div className="font-opensans text-white">
-          <div className="group">
+        <div className="font-opensans text-white overflow-hidden">
+          <div className={`group mobile-menu-ani ${activeMenu === 1 ? 'active': ''}`}>
             <div className="max-w-[327px] mx-auto flex justify-between items-center py-5">
-              <p className="text-white text-[16px] leading-normal">Investment</p>
+              <p className="text-white text-[16px] leading-normal font-semibold">Investment</p>
               <div>
                 <Image src='/images/expandarrow.png' width={22} height={18} alt=""
                 className="group-hover:rotate-180" />
@@ -180,16 +188,16 @@ export const HeaderPageElement = ( { logo } ) => {
               <p className="max-w-[327px] mx-auto text-[15px] font-opensans text-white mb-[19px]">
               Investing with integrity.
               </p>
-              <Link href='/management' className="">
+              <Link href='/management' className="" onClick={( e ) => pageReload(e,'/management')}>
                 <div className="bg-[#606060]">
-                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
+                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px] text-[14px]">
                     Managment
                   </div>
                 </div>
               </Link>
-              <Link href='/assets' className="">
+              <Link href='/assets' className="" onClick={( e ) => pageReload(e,'/assets')}>
                 <div className="bg-[#606060]">
-                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px]">
+                  <div className="max-w-[327px] mx-auto pt-[21px] pb-[22px] text-[14px]">
                     Assets
                   </div>
                 </div>
@@ -197,10 +205,10 @@ export const HeaderPageElement = ( { logo } ) => {
             </div>
           </div>
         </div>
-        <div className="font-opensans text-white">
-          <div className="group">
-            <Link href='/contact' className="max-w-[327px] mx-auto flex justify-between items-center py-5">
-              <p className="text-white text-[16px] leading-normal">Contact</p>
+        <div className="font-opensans text-white overflow-hidden">
+          <div className={`group mobile-menu-ani ${activeMenu === 1 ? 'active': ''}`}>
+            <Link href='/contact' className="max-w-[327px] mx-auto flex justify-between items-center py-5" onClick={( e ) => pageReload(e,'/contact')}>
+              <p className="text-white text-[16px] leading-normal font-semibold">Contact</p>
             </Link>
           </div>
         </div>

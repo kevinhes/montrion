@@ -31,23 +31,26 @@
 
 .full-screen-overlay {
   position: fixed;
-  top: 97px;
+  top: 55px;
   left: 0;
   width: 100%;
-  height: calc(100vh - 97px);
-  z-index: 40;
+  height: calc(100vh - 55px);
+  z-index: -1;
   background: #222727;
-  opacity: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity .3s ease-in-out;
-  transform: translateY(150%);
+}
+
+.full-screen-overlay.deactivate {
+  opacity: 0;
+  transition: all .5s ease-in-out;
 }
 
 .full-screen-overlay.active {
   opacity: .7;
-  transform: translateY(0%);
+  z-index: 40;
+  transition: all .5s ease-in-out;
 }
 
 @media (max-width: 768px) {
@@ -56,11 +59,14 @@
   }
 }
 
-.link-hover span{
+.link-hover .over-img{
   transition: all 1s ease-in-out;
+  left: 0;
 }
 
-.link-hover:hover span {margin-right: 20px;}
+.link-hover:hover .over-img {
+  left: 10px;
+}
 
 .off-canvas {
   position: fixed;
@@ -88,7 +94,7 @@
 }
 
 .select-tab.active{
-  height: 120px;
+  height: 90px;
 }
 
 .select-tab.active > div{
@@ -97,4 +103,23 @@
 
 .select-tab.active > div > img{
   opacity: 1;
+}
+
+.mobile-menu-ani {
+  transform: translateY(200%);
+  transition: transform 1s ease-in-out;
+  transition-delay: .9s;
+}
+
+.mobile-menu-ani.active {
+  transform: translateY(0%);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page-ani {
+  animation: fadeIn 1s ease-in-out forwards;
 }

@@ -40,7 +40,7 @@ export default function OverView({ banner, smBanner }) {
   };
   
   return (
-    <div>
+    <div className='page-ani'>
       <HeaderPageElement></HeaderPageElement>
       <div className='max-w-[327px] mx-auto pt-[30px] md:hidden'>
         <h3 className='md:w-[680px] text-[#2E4E4C] font-opensans
@@ -63,8 +63,8 @@ export default function OverView({ banner, smBanner }) {
         <h1 className='hidden md:block text-center text-[36px] font-crimson leading-[42px] font-bold text-[#723C3F] mb-[51px]'>Stay connected</h1>
         {
           isFormSubmitted ? (
-            <div className="mx-auto max-w-[327px] md:max-w-[845px]">
-              <p className='text-center text-[36px] font-crimson'>
+            <div className="mx-auto max-w-[327px] md:max-w-[845px] md:h-[540px]">
+              <p className='text-center text-[24px] leading-[33px] font-normal text-[#723c3fb3] font-opensans'>
                 We value your response.<br />
                 A member of our team will get back to you promptly.
               </p>

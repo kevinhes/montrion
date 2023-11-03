@@ -6,7 +6,7 @@ import { FooterElement } from '../components/Footer'
 
 export default function OverView({ title, subtitle, content, asideImg, smAsideImg }) {
   return (
-    <div>
+    <div className='page-ani'>
       <HeaderPageElement></HeaderPageElement>
       <div className='md:pt-[91px] pt-[30px] md:pb-[233px] relative'>
         <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px]'>
@@ -21,7 +21,7 @@ export default function OverView({ title, subtitle, content, asideImg, smAsideIm
           font-bold mb-[30px]">
             {title}
           </h2>
-          <p className='hidden md:block text-[#723C3F] w-[58%] font-opensans text-[24px] opacity-70' dangerouslySetInnerHTML={{ __html: content }} />
+          <p className='hidden md:block text-[#723C3F] w-[58%] font-opensans text-[16px] opacity-70' dangerouslySetInnerHTML={{ __html: content }} />
         </div>
         <div className="hidden md:block md:absolute right-0 top-0 md:h-full
         md:w-[35%] h-[250px] mb-[30px] md:mb-0">

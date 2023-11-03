@@ -66,7 +66,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
           return newBanner;
       });      
       }
-    }, 3000);
+    }, 10000);
   
     // 清除定時器，當組件卸載時
     return () => clearInterval(interval);
@@ -98,13 +98,13 @@ export default function Home({ banner, banner_list, up_arrow }) {
     <div className="relative h-screen">
       <HeaderElement></HeaderElement>
       {/* banner */}
-      <div className={`relative flex justify-center items-center h-full overflow-hidden`}>
+      <div className={`relative flex justify-center items-center h-full overflow-hidden page-ani`}>
         <div className={`relative z-10 ${sliding === 1 ? 'hidden' : ''}`}>
           <div className="w-[303px] md:w-[728px]">
             <h2
               className="text-white text-center font-crimsontext font-semibold
               text-[32px] leading-[42px]
-              md:text-[55px] md:leading-[68px]">
+              md:text-[2.2em] md:leading-[60px]">
               {banner.title}
             </h2>
           </div>
@@ -125,11 +125,11 @@ export default function Home({ banner, banner_list, up_arrow }) {
         </div>
         {
           banner_list.map((bannerItem, index) => (
-            <div key={index} className={`absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-1000 z-20 ${activeBanner === index ? 'opacity-100' : 'opacity-0'}`}>
+            <div key={index} className={`page-ani absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-[2000ms] z-20 ${activeBanner === index ? 'opacity-100' : 'opacity-0'}`}>
               <div className="relative z-10">
                 <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[905px] mb-5 md:mb-0
                 text-[32px] leading-[42px] ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
-                md:text-[55px] md:leading-[68px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
+                md:text-[2.2em] md:leading-[60px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
                 <div className="flex justify-center">
                   <Link href={routeMapping[index]}
                     className="md:hidden block py-[14px] px-[30px]
@@ -157,11 +157,11 @@ export default function Home({ banner, banner_list, up_arrow }) {
         }
       </div>
       {/* banner switch */}
-      <div className="absolute bottom-0 hidden md:flex justify-between w-full items-end z-20 h-[120px] overflow-hidden">
+      <div className="page-ani absolute bottom-0 hidden md:flex justify-between w-full items-end z-50 h-[120px] overflow-hidden">
       {banner_list.filter((_, index) => index <= 3 && index > 0).map((item, index) => (
         <Link href={routeMapping[index]}
           key={index} 
-          className={`select-tab w-1/3 h-[50px] py-[13px] flex justify-center ${index === hoveredTab ? "active" : ""} hover:h-[120px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
+          className={`select-tab w-1/3 h-[40px] py-[13px] flex justify-center ${index === hoveredTab ? "active" : ""} hover:h-[90px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
           onMouseEnter={(e) => bgChangeEnter(e,index + 1)}
           onMouseLeave={bgChangeLeave}>
           <div className="h-6 overflow-hidden group-hover:h-[60px]">
@@ -172,12 +172,12 @@ export default function Home({ banner, banner_list, up_arrow }) {
               alt="up arrow"
               className="ml-auto mr-auto block h-[24px] opacity-30 group-hover:opacity-100"
             />
-            <p className="text-white font-opensans text-[24px] leading-[18px] font-semibold mt-[11px]">{item.title}</p>
+            <p className="text-white font-opensans text-[20px] uppercase font-normal leading-[18px] mt-[11px]">{item.title}</p>
           </div>
         </Link>
       ))}
       </div>
-      <div className="absolute bottom-0 flex md:hidden justify-between w-full items-end z-20">
+      <div className="page-ani absolute bottom-0 flex md:hidden justify-between w-full items-end z-50">
         {banner_list.filter((_, index) => index <= 3 && index > 0).map((item, index) => (
             <Link href={routeMapping[index]}
               key={index} 

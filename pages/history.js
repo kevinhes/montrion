@@ -7,7 +7,7 @@ import { FooterElement } from '../components/Footer'
 export default function OverView({ bannerGroup, contentList }) {
   console.log(bannerGroup, contentList);
   return (
-    <div>
+    <div className='page-ani'>
       <HeaderPageElement></HeaderPageElement>
       <div className="relative md:h-[730px] lg:h-[660px] xl:h-[600px] 2xl:h-[540px] pt-[30px] md:pt-[138px] lg:pt-[120px] 2xl:pt-[80px]">
         <div className="relative z-10 w-full flex justify-end md:pr-[81px] mx-auto md:mx-0 max-w-[327px] md:max-w-none mb-[30px] md:mb-0">
@@ -38,7 +38,7 @@ export default function OverView({ bannerGroup, contentList }) {
                   <h2 className='text-[#723C3F] font-crimson md:text-[32px] md:leading-[35px] font-bold md:mb-[20px] mb-[10px]'>
                     {item.title}
                   </h2>
-                  <p className='text-[#723C3F] font-opensans md:text-[24px] text-[15px] opacity-70 md:leadging-[33px] leading-normal' dangerouslySetInnerHTML={{ __html: item.content }} />
+                  <p className='text-[#723C3F] font-opensans md:text-[16px] text-[15px] opacity-70 md:leadging-normal leading-normal' dangerouslySetInnerHTML={{ __html: item.content }} />
                 </div>
               </div>
             )
