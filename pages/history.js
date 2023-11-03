@@ -38,7 +38,7 @@ export default function OverView({ bannerGroup, contentList }) {
                   <h2 className='text-[#723C3F] font-crimson md:text-[32px] md:leading-[35px] font-bold md:mb-[20px] mb-[10px]'>
                     {item.title}
                   </h2>
-                  <p className='text-[#723C3F] font-opensans md:text-[16px] text-[15px] opacity-70 md:leadging-normal leading-normal' dangerouslySetInnerHTML={{ __html: item.content }} />
+                  <p className='text-[#723C3F] font-opensans md:text-[1em] text-[15px] opacity-70 md:leadging-normal leading-normal' dangerouslySetInnerHTML={{ __html: item.content }} />
                 </div>
               </div>
             )

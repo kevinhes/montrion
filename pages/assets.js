@@ -20,7 +20,7 @@ export default function OverView({ title, subtitle, content, asideImg, smAsideIm
             md:text-[36px] text-[20px] md:leading-[42px] leading-normal font-bold mb-[30px]">
               {title}
             </h2>
-            <p className='hidden md:block text-[#723C3F] w-[58%] font-opensans text-[16px] opacity-70' dangerouslySetInnerHTML={{ __html: content }} />
+            <p className='hidden md:block text-[#723C3F] w-[58%] font-opensans text-[1em] opacity-70' dangerouslySetInnerHTML={{ __html: content }} />
           </div>
         </div>
         <div className="hidden md:block md:absolute left-0 top-0 md:h-full md:w-[35%] h-[250px] mb-[30px] md:mb-0">
