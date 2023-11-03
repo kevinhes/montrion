@@ -95,10 +95,10 @@ export default function Home({ banner, banner_list, up_arrow }) {
   
   const routeMapping = ['/history', '/assets', '/contact', '/']
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen page-ani">
       <HeaderElement></HeaderElement>
       {/* banner */}
-      <div className={`relative flex justify-center items-center h-full overflow-hidden page-ani`}>
+      <div className={`relative flex justify-center items-center h-full overflow-hidden `}>
         <div className={`relative z-10 ${sliding === 1 ? 'hidden' : ''}`}>
           <div className="w-[303px] md:w-[728px]">
             <h2
@@ -125,7 +125,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
         </div>
         {
           banner_list.map((bannerItem, index) => (
-            <div key={index} className={`page-ani absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-[2000ms] z-20 ${activeBanner === index ? 'opacity-100' : 'opacity-0'}`}>
+            <div key={index} className={` absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-[2000ms] z-20 ${activeBanner === index ? 'opacity-100' : 'opacity-0'}`}>
               <div className="relative z-10">
                 <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[905px] mb-5 md:mb-0
                 text-[32px] leading-[42px] ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
@@ -157,7 +157,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
         }
       </div>
       {/* banner switch */}
-      <div className="page-ani absolute bottom-0 hidden md:flex justify-between w-full items-end z-50 h-[120px] overflow-hidden">
+      <div className=" absolute bottom-0 hidden md:flex justify-between w-full items-end z-50 h-[120px] overflow-hidden">
       {banner_list.filter((_, index) => index <= 3 && index > 0).map((item, index) => (
         <Link href={routeMapping[index]}
           key={index} 
@@ -177,7 +177,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
         </Link>
       ))}
       </div>
-      <div className="page-ani absolute bottom-0 flex md:hidden justify-between w-full items-end z-50">
+      <div className=" absolute bottom-0 flex md:hidden justify-between w-full items-end z-50">
         {banner_list.filter((_, index) => index <= 3 && index > 0).map((item, index) => (
             <Link href={routeMapping[index]}
               key={index} 
