@@ -123,3 +123,11 @@
 .page-ani {
   animation: fadeIn 1s ease-in-out forwards;
 }
+
+html, body {
+  height: 100%;
+}
+
+#__next {
+  height: 100%;
+}

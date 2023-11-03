@@ -95,7 +95,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
   
   const routeMapping = ['/history', '/assets', '/contact', '/']
   return (
-    <div className="relative h-screen page-ani">
+    <div className="relative h-full page-ani">
       <HeaderElement></HeaderElement>
       {/* banner */}
       <div className={`relative flex justify-center items-center h-full overflow-hidden `}>
@@ -125,7 +125,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
         </div>
         {
           banner_list.map((bannerItem, index) => (
-            <div key={index} className={` absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-[2000ms] z-20 ${activeBanner === index ? 'opacity-100' : 'opacity-0'}`}>
+            <div key={index} className={` absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-[2000ms] z-20 ${activeBanner === index ? 'opacity-100 z-30' : 'opacity-0'}`}>
               <div className="relative z-10">
                 <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[905px] mb-5 md:mb-0
                 text-[32px] leading-[42px] ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
