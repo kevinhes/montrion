@@ -93,7 +93,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
     setIsHovering(false);
   }
   
-  const routeMapping = ['/history', '/assets', '/contact', '/']
+  const routeMapping = ['/', '/history', '/assets', '/contact', '/']
   return (
     <div className="relative h-full page-ani">
       <HeaderElement></HeaderElement>
