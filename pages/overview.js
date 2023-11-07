@@ -20,16 +20,16 @@ export default function OverView({ title, subtitle, content, footerImg, smFooter
           </h2>
         </div>
       </div>
-      <div className='h-[250px] md:hidden mb-[30px]'>
-        <Image src={smFooterImg.url} width={375} height={250} className='w-full h-full object-cover' alt='footer image' />
+      <div className='h-[250px] md:hidden mb-[30px] overflow-hidden'>
+        <Image src={smFooterImg.url} width={375} height={250} className='scale-animation w-full h-full object-cover' alt='footer image' />
       </div>
       <div className="mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px] md:pb-[103px] pb-[61px]" >
         <div className='md:w-[78%]'>
           <p className='text-[#723C3F] font-opensans text-[15px] leading-[20px] md:leading-normal md:text-[1em] opacity-70' dangerouslySetInnerHTML={{ __html: content }} />
         </div>
       </div>
-      <div className='h-[450px] hidden md:block'>
-        <Image src={footerImg.url} width={1610} height={1080} className='w-full h-full object-cover' alt='footer image' />
+      <div className='h-[450px] hidden md:block overflow-hidden'>
+        <Image src={footerImg.url} width={1610} height={1080} className='scale-animation w-full h-full object-cover' alt='footer image' />
       </div>
       <FooterElement></FooterElement>
     </div>

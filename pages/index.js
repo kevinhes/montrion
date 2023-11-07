@@ -66,7 +66,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
           return newBanner;
       });      
       }
-    }, 10000);
+    }, 8000);
   
     // 清除定時器，當組件卸載時
     return () => clearInterval(interval);
@@ -93,18 +93,19 @@ export default function Home({ banner, banner_list, up_arrow }) {
     setIsHovering(false);
   }
   
-  const routeMapping = ['/', '/history', '/assets', '/contact', '/']
+  const routeMapping = ['/history', '/assets', '/contact', '/']
+  const mobileRouteMapping = ['/', '/history', '/assets', '/contact']
   return (
     <div className="relative h-full page-ani">
       <HeaderElement></HeaderElement>
       {/* banner */}
       <div className={`relative flex justify-center items-center h-full overflow-hidden `}>
         <div className={`relative z-10 ${sliding === 1 ? 'hidden' : ''}`}>
-          <div className="w-[303px] md:w-[728px]">
+          <div className="w-[303px] md:w-[480px]">
             <h2
               className="text-white text-center font-crimsontext font-semibold
               text-[32px] leading-[42px]
-              md:text-[2.2em] md:leading-[60px]">
+              md:text-[2.2em] md:leading-[54px]">
               {banner.title}
             </h2>
           </div>
@@ -124,36 +125,70 @@ export default function Home({ banner, banner_list, up_arrow }) {
             className='md:hidden w-full h-full object-cover'/>
         </div>
         {
-          banner_list.map((bannerItem, index) => (
-            <div key={index} className={` absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-[2000ms] z-20 ${activeBanner === index ? 'opacity-100 z-30' : 'opacity-0'}`}>
-              <div className="relative z-10">
-                <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[905px] mb-5 md:mb-0
-                text-[32px] leading-[42px] ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
-                md:text-[2.2em] md:leading-[60px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
-                <div className="flex justify-center">
-                  <Link href={routeMapping[index]}
-                    className="md:hidden block py-[14px] px-[30px]
-                    border border-white text-white hover:bg-white hover:text-black ">
-                    Learn more
-                  </Link>
+          banner_list.map((bannerItem, index) =>  {
+            if ( index === 0 ) {
+              return (
+                <div key={index} className={`absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-[1500ms] z-20 ${activeBanner === index ? 'opacity-100 z-30 scale-animation' : 'opacity-0'}`}>
+                  <div className="relative z-10">
+                    <h2 className={`text-white text-center font-crimsontext w-[290px] md:w-[500px] mb-5 md:mb-0
+                    text-[32px] leading-normal ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
+                    md:text-[2.2em] md:leading-[54px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
+                    <div className="flex justify-center">
+                      <Link href={mobileRouteMapping[index]}
+                        className="md:hidden block py-[14px] px-[30px]
+                        border border-white text-white hover:bg-white hover:text-black ">
+                        Learn more
+                      </Link>
+                    </div>
+                  </div>
+                  <Image
+                    src={bannerItem.bg_img['url']}
+                    width={1534}
+                    height={985}
+                    alt="banner image"
+                    className={`absolute w-full h-full top-0 left-0 object-cover hidden md:block ${activeBanner === index ? 'scale-animation' : 'opacity-0'}`}
+                  />
+                  <Image
+                    src={bannerItem.sm_background_img['url']}
+                    width={375}
+                    height={646}
+                    alt="banner image"
+                    className="absolute w-full h-full top-0 left-0 object-cover object-bottom md:hidden"
+                  />
+                </div>)
+            } else {
+              return (
+              <div key={index} className={` absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-[1500ms] z-20 ${activeBanner === index ? 'opacity-100 z-30' : 'opacity-0'}`}>
+                <div className="relative z-10">
+                  <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[500px] mb-5 md:mb-0
+                  text-[26px] leading-normal ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
+                  md:text-[2.2em] md:leading-[54px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
+                  <div className="flex justify-center">
+                    <Link href={mobileRouteMapping[index]}
+                      className="md:hidden block py-[14px] px-[30px]
+                      border border-white text-white hover:bg-white hover:text-black ">
+                      Learn more
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <Image
-                src={bannerItem.bg_img['url']}
-                width={1534}
-                height={985}
-                alt="banner image"
-                className="absolute w-full h-full top-0 left-0 object-cover hidden md:block"
-              />
-              <Image
-                src={bannerItem.sm_background_img['url']}
-                width={375}
-                height={646}
-                alt="banner image"
-                className="absolute w-full h-full top-0 left-0 object-cover object-bottom md:hidden"
-              />
-            </div>
-          ))
+                <Image
+                  src={bannerItem.bg_img['url']}
+                  width={1534}
+                  height={985}
+                  alt="banner image"
+                  className="absolute w-full h-full top-0 left-0 object-cover hidden md:block"
+                />
+                <Image
+                  src={bannerItem.sm_background_img['url']}
+                  width={375}
+                  height={646}
+                  alt="banner image"
+                  className="absolute w-full h-full top-0 left-0 object-cover object-bottom md:hidden"
+                />
+              </div>)
+            }
+          }
+          )
         }
       </div>
       {/* banner switch */}
@@ -167,19 +202,19 @@ export default function Home({ banner, banner_list, up_arrow }) {
           <div className="h-6 overflow-hidden group-hover:h-[60px]">
             <Image
               src={up_arrow['url']}
-              width={24}
-              height={24}
+              width={20}
+              height={20}
               alt="up arrow"
               className="ml-auto mr-auto block h-[24px] opacity-30 group-hover:opacity-100"
             />
-            <p className="text-white font-opensans text-[20px] uppercase font-normal leading-[18px] mt-[11px]">{item.title}</p>
+            <p className="text-white font-opensans text-[18px] uppercase font-normal leading-[18px] mt-[5px]">{item.title}</p>
           </div>
         </Link>
       ))}
       </div>
       <div className=" absolute bottom-0 flex md:hidden justify-between w-full items-end z-50">
         {banner_list.filter((_, index) => index <= 3 && index > 0).map((item, index) => (
-            <Link href={routeMapping[index]}
+            <Link href={mobileRouteMapping[index]}
               key={index} 
               className={`select-tab w-1/3 h-[48px] py-[15px] flex justify-center hover:items-center hover:h-[60px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
               onClick={(e) => bgChangeEnter(e,index + 1)}>
