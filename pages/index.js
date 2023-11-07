@@ -56,6 +56,11 @@ export default function Home({ banner, banner_list, up_arrow }) {
   const [isHovering, setIsHovering] = useState(false);
   const [hoveredTab, setHoveredTab] = useState(null);
   const [sliding, setSliding] = useState(1);
+  const [cookieAgree, setCookieAgree] = useState(false);
+
+  function changeCookie (status) {
+    setCookieAgree(status);
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -126,67 +131,39 @@ export default function Home({ banner, banner_list, up_arrow }) {
         </div>
         {
           banner_list.map((bannerItem, index) =>  {
-            if ( index === 0 ) {
-              return (
-                <div key={index} className={`absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-[1500ms] z-20 ${activeBanner === index ? 'opacity-100 z-30 scale-animation' : 'opacity-0'}`}>
-                  <div className="relative z-10">
-                    <h2 className={`text-white text-center font-crimsontext w-[290px] md:w-[500px] mb-5 md:mb-0
-                    text-[32px] leading-normal ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
-                    md:text-[2.2em] md:leading-[54px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
-                    <div className="flex justify-center">
-                      <Link href={mobileRouteMapping[index]}
-                        className="md:hidden block py-[14px] px-[30px]
-                        border border-white text-white hover:bg-white hover:text-black ">
-                        Learn more
-                      </Link>
-                    </div>
-                  </div>
-                  <Image
-                    src={bannerItem.bg_img['url']}
-                    width={1534}
-                    height={985}
-                    alt="banner image"
-                    className={`absolute w-full h-full top-0 left-0 object-cover hidden md:block ${activeBanner === index ? 'scale-animation' : 'opacity-0'}`}
-                  />
-                  <Image
-                    src={bannerItem.sm_background_img['url']}
-                    width={375}
-                    height={646}
-                    alt="banner image"
-                    className="absolute w-full h-full top-0 left-0 object-cover object-bottom md:hidden"
-                  />
-                </div>)
-            } else {
-              return (
-              <div key={index} className={` absolute w-full h-full top-0 left-0 flex justify-center items-center transition-opacity duration-[1500ms] z-20 ${activeBanner === index ? 'opacity-100 z-30' : 'opacity-0'}`}>
-                <div className="relative z-10">
-                  <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[500px] mb-5 md:mb-0
-                  text-[26px] leading-normal ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
-                  md:text-[2.2em] md:leading-[54px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
-                  <div className="flex justify-center">
-                    <Link href={mobileRouteMapping[index]}
-                      className="md:hidden block py-[14px] px-[30px]
-                      border border-white text-white hover:bg-white hover:text-black ">
-                      Learn more
-                    </Link>
-                  </div>
+            return (
+            <div
+              key={index}
+              className={`absolute w-full h-full top-0 left-0 flex justify-center
+              items-center transition-opacity duration-[1500ms] z-20
+              ${activeBanner === index ? 'opacity-100 z-30' : 'opacity-0'} ${index === 0 ? 'scale-animation' : ''}`}>
+              <div className="relative z-10">
+                <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[500px] mb-5 md:mb-0
+                text-[26px] leading-normal ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
+                md:text-[2.2em] md:leading-[54px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
+                <div className="flex justify-center">
+                  <Link href={mobileRouteMapping[index]}
+                    className="md:hidden block py-[14px] px-[30px]
+                    border border-white text-white hover:bg-white hover:text-black ">
+                    Learn more
+                  </Link>
                 </div>
-                <Image
-                  src={bannerItem.bg_img['url']}
-                  width={1534}
-                  height={985}
-                  alt="banner image"
-                  className="absolute w-full h-full top-0 left-0 object-cover hidden md:block"
-                />
-                <Image
-                  src={bannerItem.sm_background_img['url']}
-                  width={375}
-                  height={646}
-                  alt="banner image"
-                  className="absolute w-full h-full top-0 left-0 object-cover object-bottom md:hidden"
-                />
-              </div>)
-            }
+              </div>
+              <Image
+                src={bannerItem.bg_img['url']}
+                width={1534}
+                height={985}
+                alt="banner image"
+                className="absolute w-full h-full top-0 left-0 object-cover hidden md:block"
+              />
+              <Image
+                src={bannerItem.sm_background_img['url']}
+                width={375}
+                height={646}
+                alt="banner image"
+                className="absolute w-full h-full top-0 left-0 object-cover object-bottom md:hidden"
+              />
+            </div>)
           }
           )
         }
@@ -230,6 +207,21 @@ export default function Home({ banner, banner_list, up_arrow }) {
               </div>
             </Link>
           ))}
+      </div>
+      {/* cookie */}
+      <div className={`fixed w-[623px] h-[215px] right-[35px] bottom-[66px] py-[33px] pl-[35px] pr-[23px] bg-[#222727] z-50 hidden ${cookieAgree === true ? 'md:hidden' : 'md:block'}`}>
+        <h4 className="text-[18px] font-crimson text-white mb-3 leading-[20px]">We value your privacy</h4>
+        <p className="text-[14px] text-white font-opensans mb-[18px] leading-[19px]">We use cookies to enhance your browsing experience and analyze our traffic. By clicking on the “Agree” button or continuing to browse this website, you agree to our use of cookies. To learn more, please view our <Link href="/privacy" className="underline">Privacy Policy</Link>.</p>
+        <div className="flex">
+          <button
+            onClick={() => changeCookie(true)}
+            className="bg-[#723C3F] text-white font-opensans font-semibold h-[44px] text-[16px] leading-[20px] py-[12px] px-[20px] mr-5">Agree
+          </button>
+          <button
+            onClick={() => changeCookie(false)}
+            className="text-white border border-white font-opensans font-semibold h-[44px] text-[16px] leading-[20px] py-[12px] px-[20px]">Disagree
+          </button>
+        </div>
       </div>
     </div>
   );
