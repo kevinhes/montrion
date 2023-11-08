@@ -111,7 +111,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
             <h2
               className="text-white text-center font-crimsontext font-semibold
               text-[32px] leading-[42px]
-              md:text-[2.2em] md:leading-[54px]">
+              md:text-[2em] md:leading-[54px]">
               {banner.title}
             </h2>
           </div>
@@ -141,7 +141,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
               <div className="relative z-10">
                 <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[500px] mb-5 md:mb-0
                 text-[26px] leading-normal ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
-                md:text-[2.2em] md:leading-[54px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
+                md:text-[2em] md:leading-[54px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
                 <div className="flex justify-center">
                   <Link href={mobileRouteMapping[index]}
                     className="md:hidden block py-[14px] px-[30px]
