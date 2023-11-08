@@ -147,6 +147,7 @@ export async function getStaticProps() {
       props: {
         banner, smBanner
       },
+      revalidate: 60,
     };
   } catch (error) {
     console.error("Error fetching home page content:", error);

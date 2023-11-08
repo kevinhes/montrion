@@ -52,6 +52,7 @@ export async function getStaticProps() {
       props: {
         title, subtitle, content, asideImg, smAsideImg
       },
+      revalidate: 60,
     };
   } catch (error) {
     console.error("Error fetching home page content:", error);

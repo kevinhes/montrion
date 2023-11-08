@@ -34,6 +34,7 @@ export async function getStaticProps() {
       props: {
         initialContent: content,
       },
+      revalidate: 60,
     };
   } catch (error) {
     console.error("Error fetching home page content:", error);

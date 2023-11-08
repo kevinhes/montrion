@@ -38,6 +38,7 @@ export async function getStaticProps() {
         banner_list,
         up_arrow,
       },
+      revalidate: 60,
     };
   } catch (error) {
     console.error("Error fetching home page content:", error);
