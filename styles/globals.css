@@ -150,7 +150,7 @@ html, body {
 
 /* 定义动画的类 */
 .scale-animation {
-  animation: scaleUp 3s forwards; /* 指定动画，持续时间和填充模式 */
+  animation: scaleUp 10s forwards; /* 指定动画，持续时间和填充模式 */
 }
 
 .mobile-submenu {

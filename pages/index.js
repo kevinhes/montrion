@@ -72,7 +72,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
           return newBanner;
       });      
       }
-    }, 8000);
+    }, 5000);
   
     // 清除定時器，當組件卸載時
     return () => clearInterval(interval);
