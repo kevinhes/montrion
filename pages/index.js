@@ -85,18 +85,20 @@ export default function Home({ banner, banner_list, up_arrow }) {
       setActiveBanner(index);
       setIsHovering(true);
       setHoveredTab(null);
-      setSliding(0);
+      setSliding(1);
     } else {
       setActiveBanner(index);
       setIsHovering(true);
       setHoveredTab(null);
-      setSliding(0);
+      setSliding(1);
     }
   }
 
   function bgChangeLeave() {
     setActiveBanner();
     setIsHovering(false);
+    setSliding(0);
+    setActiveBanner(0)
   }
   
   const routeMapping = ['/history', '/assets', '/contact', '/']
@@ -106,7 +108,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
       <HeaderElement></HeaderElement>
       {/* banner */}
       <div className={`relative flex justify-center items-center h-full overflow-hidden `}>
-        <div className={`relative z-10 ${sliding === 1 ? 'hidden' : ''}`}>
+        <div className={`relative z-10`}>
           <div className="w-[303px] md:w-[480px]">
             <h2
               className="text-white text-center font-crimsontext font-semibold
@@ -116,13 +118,13 @@ export default function Home({ banner, banner_list, up_arrow }) {
             </h2>
           </div>
         </div>
-        <div className={`absolute w-full h-full top-0 left-0 ${sliding === 1 ? 'hidden opacity-30' : ''}`}>
+        <div className={`absolute w-full h-full top-0 left-0`}>
           <Image
             src={banner.banner_img['url']}
             width={1534}
             height={985}
             alt="bannner image"
-            className='hidden md:block w-full h-full object-cover'/>
+            className={`hidden md:block w-full h-full object-cover ${sliding === 1 ? 'opacity-0' : 'scale-animation'}`} />
           <Image
             src={banner.sm_banner_img['url']}
             width={375}
@@ -137,10 +139,10 @@ export default function Home({ banner, banner_list, up_arrow }) {
               key={index}
               className={`absolute w-full h-full top-0 left-0 flex justify-center
               items-center transition-opacity duration-[1500ms] z-20
-              ${activeBanner === index ? 'opacity-100 z-30' : 'opacity-0'} ${index === 0 ? 'scale-animation' : ''}`}>
+              ${activeBanner === index ? 'opacity-100 z-30' : 'opacity-0'}`}>
               <div className="relative z-10">
                 <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[500px] mb-5 md:mb-0
-                text-[26px] leading-normal ${activeBanner === index ? 'opacity-100' : 'opacity-0'}
+                text-[26px] leading-normal
                 md:text-[2em] md:leading-[54px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
                 <div className="flex justify-center">
                   <Link href={mobileRouteMapping[index]}
@@ -155,7 +157,8 @@ export default function Home({ banner, banner_list, up_arrow }) {
                 width={1534}
                 height={985}
                 alt="banner image"
-                className="absolute w-full h-full top-0 left-0 object-cover hidden md:block"
+                className={`absolute w-full h-full top-0 left-0 object-cover hidden md:block 
+                  ${index === 0 ? (activeBanner === 0 ? 'scale-animation' : 'scale-down-animation') : ''}`}
               />
               <Image
                 src={bannerItem.sm_background_img['url']}

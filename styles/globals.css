@@ -160,3 +160,27 @@ html, body {
 .mobile-submenu.active {
   max-height: 500px;
 }
+
+@keyframes scaleDown {
+  from {
+    transform: scale(1.08); /* 开始状态 */
+  }
+  to {
+    transform: scale(1); /* 结束状态 */
+  }
+}
+
+/* 当 banner 不活跃时应用缩小动画 */
+.scale-down-animation {
+  animation: scaleDown 10s forwards;
+}
+
+/* 使用过渡代替动画 */
+.image-transition {
+  transition: transform 10s;
+}
+
+.image-transition.scale-up {
+  transform: scale(1.08);
+}
+
