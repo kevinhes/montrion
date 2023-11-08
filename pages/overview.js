@@ -6,7 +6,7 @@ import { FooterElement } from '../components/Footer'
 
 export default function OverView({ title, subtitle, content, footerImg, smFooterImg }) {
   return (
-    <div className=''>
+    <div className='page-ani'>
       <HeaderPageElement></HeaderPageElement>
       <div className="mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px] pt-[30px] md:pt-[97px]" >
         <div className='md:w-[78%]'>
