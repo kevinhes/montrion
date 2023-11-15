@@ -166,10 +166,10 @@ export default function OverView({ banner, smBanner }) {
                   <input
                     type="email"
                     {...register('customerEmail', { 
-                      required: 'Please provide a valid email address',
+                      required: 'Please complete this mandatory field',
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: 'Invalid email address'
+                        message: 'Please provide a valid email address'
                       }
                     })}
                     className={`form-control w-full md:pl-[41px] h-[55px] md:h-[50px]
