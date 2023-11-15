@@ -165,16 +165,22 @@ export default function OverView({ banner, smBanner }) {
                 <div className=''>
                   <input
                     type="email"
-                    name='customerEmail'
-                    {...register( 'customerEmail', { required:true } )}
+                    {...register('customerEmail', { 
+                      required: 'Please provide a valid email address',
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: 'Invalid email address'
+                      }
+                    })}
                     className={`form-control w-full md:pl-[41px] h-[55px] md:h-[50px]
                     flex items-center pl-[18px] ${errors.customerEmail ? 'border border-[#FF0000]' : ''} `}
                     placeholder='Email' />
                   <div className={`mt-5 errormessage ${errors.customerEmail ? 'active' : ''}`}>
-                    <p className='text-[#ff0000]'>Please provide a valid email address</p>
+                    <p className='text-[#ff0000]'>{errors.customerEmail?.message}</p>
                   </div>
                 </div>
               </div>
+
               <div className='md:mb-5 mb-[10px]'>
                 <input
                   type="text"
