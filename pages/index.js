@@ -61,7 +61,6 @@ export default function Home({ banner, banner_list, up_arrow }) {
   const [bannerScale, setBannerScale] = useState(true);
 
   function bannerScaleChange(status) {
-    console.log(status);
     setBannerScale(status)
   }
 
@@ -75,6 +74,11 @@ export default function Home({ banner, banner_list, up_arrow }) {
         setActiveBanner((prevBanner) => {
           const newBanner = (prevBanner + 1) % banner_list.length;
           setHoveredTab(newBanner - 1);
+          if ( prevBanner === 1) {
+            setBannerScale(false);
+          } else if ( prevBanner === 3 ) {
+            setBannerScale(true);
+          }
           return newBanner;
       });      
       }
