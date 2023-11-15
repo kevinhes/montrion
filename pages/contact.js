@@ -123,7 +123,7 @@ export default function OverView({ banner, smBanner }) {
           ) : (
             <form action="" className='mx-auto max-w-[327px] md:max-w-[845px] font-opensans' onSubmit={handleSubmit(onSubmit)}>
               <div className="md:flex md:mb-5 mb-[10px]">
-                <div className="relative w-1/2 md:mr-5">
+                <div className="relative md:w-1/2 md:mr-5">
                   <input
                     type="text"
                     {...register( 'customerFirstname', { required:true } ) }
@@ -136,7 +136,7 @@ export default function OverView({ banner, smBanner }) {
                     <p className='text-[#ff0000]'>Please complete this mandatory field</p>
                   </div>
                 </div>
-                <div className="w-1/2 relative">
+                <div className="md:w-1/2 relative">
                   <input
                     type="text"
                     {...register( 'customerLastname', { required:true } )}
