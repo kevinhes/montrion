@@ -143,7 +143,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
               <div className="relative z-10">
                 <h2 className={`text-white text-center font-crimsontext w-[303px] md:w-[500px] mb-5 md:mb-0
                 text-[26px] leading-normal
-                md:text-[2em] md:leading-[54px]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
+                md:text-[2em] md:leading-[1.2]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
                 <div className="flex justify-center">
                   <Link href={mobileRouteMapping[index]}
                     className="md:hidden block py-[14px] px-[30px]

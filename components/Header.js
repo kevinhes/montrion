@@ -242,7 +242,7 @@ export const HeaderElement = ( { logo } ) => {
           </div>
           <div className="text-white pb-[51px] opacity-40 text-[12px] font-opensans">
             <div className="max-w-[327px] mx-auto">
-              <p className="mb-[3px]">Terms of Use | <Link href='/privacy'>Privacy & Policy</Link> </p>
+              <p className="mb-[3px]"><Link href='/term'>Terms of Use</Link> | <Link href='/privacy'>Privacy & Policy</Link> </p>
               <p>Montrion Corporation © Copyright 2023</p>
             </div>
           </div>

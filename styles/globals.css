@@ -50,13 +50,13 @@
 
 .full-screen-overlay.deactivate {
   opacity: 0;
-  transition: all .5s ease-in-out;
+  transition: opacity .5s ease-in-out;
 }
 
 .full-screen-overlay.active {
-  opacity: .7;
+  opacity: .85;
   z-index: 40;
-  transition: all .5s ease-in-out;
+  transition: opacity .5s ease-in-out;
 }
 
 @media (max-width: 768px) {
@@ -163,7 +163,7 @@ html, body {
 
 @keyframes scaleDown {
   from {
-    transform: scale(1.08); /* 开始状态 */
+    transform: scale(1.07); /* 开始状态 */
   }
   to {
     transform: scale(1); /* 结束状态 */
@@ -184,3 +184,13 @@ html, body {
   transform: scale(1.08);
 }
 
+.errormessage {
+  display: none;
+  /* position: absolute; */
+  top: calc(100%);
+  left: 0;
+}
+
+.errormessage.active {
+  display: block;
+}

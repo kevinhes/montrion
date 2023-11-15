@@ -5,35 +5,80 @@ import { FooterElement } from '../components/Footer';
 import ReCAPTCHA from "react-google-recaptcha";
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
 
 
 export default function OverView({ banner, smBanner }) {
+  const hasErrors = (errors) => {
+    return Object.keys(errors).length > 0;
+  };
+  // react-hook-form
+  const { register, handleSubmit, formState:{ errors } } = useForm();
+
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  // }
+  
+  // captcha
   const [captchaValue, setCaptchaValue] = useState(null);
   const [isFormSubmitted, setFormSubmitted] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmitC = async (e) => {
+  //   e.preventDefault();
+  //   console.log(formData);
+  //   const formData = new FormData(e.target);
+  //   formData.append('g-recaptcha-response', captchaValue);
   
-    const formData = new FormData(e.target);
-    formData.append('g-recaptcha-response', captchaValue);
+  //   try {
+  //     console.log(formData);
+  //     const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}wp-json/contact-form-7/v1/contact-forms/108/feedback`, {
+  //       method: 'POST',
+  //       body: formData
+  //     });
+  
+  //     const data = await response.json();
+  
+  //     if (data.status === "mail_sent") {
+  //       setFormSubmitted(true);
+  //     } else {
+  //       alert('發生錯誤，請稍後再試');
+  //     }
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   }
+  // };
+
+  const onSubmit = async (data) => {
+    
+    // 添加 reCAPTCHA 值
+    // formData['g-recaptcha-response'] = captchaValue;
+  
+    // 創建一個 FormData 物件以用於 POST 請求
+    const submitData = new FormData();
+    Object.keys(data).forEach(key => {
+      submitData.append(key, data[key]);
+    });
   
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}wp-json/contact-form-7/v1/contact-forms/108/feedback`, {
         method: 'POST',
-        body: formData
+        body: submitData
       });
   
-      const data = await response.json();
+      const resData = await response.json();
+      console.log(resData);
   
-      if (data.status === "mail_sent") {
+      if (resData.status === "mail_sent") {
         setFormSubmitted(true);
+        // 可以在這裡添加重置表單的邏輯，如果需要
       } else {
-        alert('發生錯誤，請稍後再試');
+        alert('There was a network error. Please go back and resubmit.');
       }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
+  
 
   const handleCaptchaChange = (value) => {
     setCaptchaValue(value);
@@ -66,8 +111,8 @@ export default function OverView({ banner, smBanner }) {
           isFormSubmitted ? (
             <div className="mx-auto max-w-[327px] md:max-w-[845px] md:h-[540px]">
               <p className='text-center text-[15px] md:text-[24px] leading-[33px] font-normal text-white opacity-70 font-opensans mb-[30px]'>
-                We value your response.<br />
-                A member of our team will get back to you promptly.
+                We value your response. Thank you.<br />
+                We‘ll get back to you promptly.
               </p>
               <div className="flex justify-center">
                 <Link href="/" class="py-5 px-[45px] bg-[#723C3F] text-white text-[18px] leading-[20px] font-opensans block">
@@ -76,49 +121,82 @@ export default function OverView({ banner, smBanner }) {
               </div>
             </div>
           ) : (
-            <form action="" className='mx-auto max-w-[327px] md:max-w-[845px] font-opensans' onSubmit={handleSubmit}>
+            <form action="" className='mx-auto max-w-[327px] md:max-w-[845px] font-opensans' onSubmit={handleSubmit(onSubmit)}>
               <div className="md:flex md:mb-5 mb-[10px]">
-                <input
-                  type="text"
-                  name='customer-firstname'
-                  className='md:mr-5 w-full md:w-auto flex-grow form-control h-[55px] md:h-[50px] flex items-center mb-[10px] md:mb-0 pl-[18px] md:pl-[41px]'
-                  placeholder='First name *' />
-                <input
-                  type="text"
-                  name='customer-lastname'
-                  className='w-full md:w-auto flex-grow form-control h-[55px] md:h-[50px] flex items-center pl-[18px] md:pl-[41px]'
-                  placeholder='Last name *' />
+                <div className="relative w-1/2 md:mr-5">
+                  <input
+                    type="text"
+                    {...register( 'customerFirstname', { required:true } ) }
+                    className={`w-full flex-grow form-control h-[55px]
+                    outline-none
+                    md:h-[50px] flex items-center mb-[10px] md:mb-0 pl-[18px] md:pl-[41px]
+                    ${errors.customerFirstname ? 'border border-[#FF0000]' : ''}`}
+                    placeholder='First name'/>
+                  <div className={`mt-5 errormessage ${errors.customerFirstname ? 'active' : ''}`}>
+                    <p className='text-[#ff0000]'>Please complete this mandatory field</p>
+                  </div>
+                </div>
+                <div className="w-1/2 relative">
+                  <input
+                    type="text"
+                    {...register( 'customerLastname', { required:true } )}
+                    className={`w-full flex-grow form-control h-[55px] md:h-[50px]
+                    flex items-center pl-[18px] md:pl-[41px] ${errors.customerLastname ? 'border border-[#FF0000]' : ''}`}
+                    placeholder='Last name' />
+                  <div className={`mt-5 errormessage ${errors.customerLastname ? 'active' : ''}`}>
+                    <p className='text-[#ff0000]'>Please complete this mandatory field</p>
+                  </div>
+                </div>
               </div>
               <div className="md:flex md:mb-5 mb-[10px]">
                 <input
                   type="text"
-                  name='customer-company'
+                  {...register( 'customerCompany' )}
                   className='md:mr-5 w-full md:w-auto flex-grow
                   form-control mb-[10px] md:mb-0 md:pl-[41px] flex items-center h-[55px] md:h-[50px] pl-[18px]'
-                  placeholder='Company *' />
+                  placeholder='Company' />
                 <input
                   type="text"
-                  name='customer-position'
+                  {...register( 'customerPosition' )}
                   className='w-full md:w-auto flex-grow form-control h-[55px] md:h-[50px] flex items-center md:pl-[41px] pl-[18px]'
-                  placeholder='Position *' />
+                  placeholder='Position' />
+              </div>
+              <div className='md:mb-5 mb-[10px]'>
+                <div className=''>
+                  <input
+                    type="email"
+                    name='customerEmail'
+                    {...register( 'customerEmail', { required:true } )}
+                    className={`form-control w-full md:pl-[41px] h-[55px] md:h-[50px]
+                    flex items-center pl-[18px] ${errors.customerEmail ? 'border border-[#FF0000]' : ''} `}
+                    placeholder='Email' />
+                  <div className={`mt-5 errormessage ${errors.customerEmail ? 'active' : ''}`}>
+                    <p className='text-[#ff0000]'>Please provide a valid email address</p>
+                  </div>
+                </div>
               </div>
               <div className='md:mb-5 mb-[10px]'>
                 <input
                   type="text"
-                  name='customer-subject'
+                  {...register( 'customerSubject' )}
                   className='form-control w-full md:pl-[41px] h-[55px] md:h-[50px] flex items-center pl-[18px]'
-                  placeholder='Subject *' />
+                  placeholder='Subject' />
               </div>
               <div className="md:mb-[30px] mb-[24px]">
-                <textarea
-                  name='customer-message'
-                  className='form-control w-full md:pt-[8px] md:pb-[18px] md:px-[41px] font-opensans md:h-[200px]
-                  py-[11px] pl-[18px]'
-                  placeholder='Message *'
-                  id=""
-                  cols="30"
-                  rows="10">
-                </textarea>
+                <div>
+                  <textarea
+                    {...register( 'customerMessage', { required:true } )}
+                    className={`form-control w-full md:pt-[8px] md:pb-[18px]
+                    md:px-[41px] font-opensans md:h-[200px] py-[11px] pl-[18px] ${errors.customerMessage ? 'border border-[#FF0000]' : ''}`}
+                    placeholder='Message'
+                    id=""
+                    cols="30"
+                    rows="10">
+                  </textarea>
+                  <div className={`mt-5 errormessage ${errors.customerMessage ? 'active' : ''}`}>
+                    <p className='text-[#ff0000]'>Please enter your message</p>
+                  </div>
+                </div>
               </div>
               <div className="md:mb-[30px] mb-[24px] flex justify-center">
                 {/* <ReCAPTCHA
@@ -126,10 +204,15 @@ export default function OverView({ banner, smBanner }) {
                   onChange={handleCaptchaChange}
                 /> */}
               </div>
-              <div className="flex justify-center"> 
+              <div className="flex flex-col justify-center items-center">
                 <input type="submit" value="Submit" className='md:py-[20px] py-[14px] md:px-[45px] px-[30px]
                 border border-[#2E4E4C] md:text-[18px] text-[14px] text-[#2E4E4C] font-semibold
                 md:leading-[20px] leading-normal font-opensans hover:bg-[#2E4E4C] hover:text-white' />
+                {hasErrors(errors) && (
+                    <div className="mt-5 errormessage active">
+                        <p className='text-[#ff0000]'>Some fields require your attention.</p>
+                    </div>
+                )}
               </div>
             </form>
           )
