@@ -58,6 +58,12 @@ export default function Home({ banner, banner_list, up_arrow }) {
   const [hoveredTab, setHoveredTab] = useState(null);
   const [sliding, setSliding] = useState(1);
   const [cookieAgree, setCookieAgree] = useState(false);
+  const [bannerScale, setBannerScale] = useState(true);
+
+  function bannerScaleChange(status) {
+    console.log(status);
+    setBannerScale(status)
+  }
 
   function changeCookie (status) {
     setCookieAgree(status);
@@ -87,18 +93,24 @@ export default function Home({ banner, banner_list, up_arrow }) {
       setHoveredTab(null);
       setSliding(1);
     } else {
+      // setBannerScale(false);
       setActiveBanner(index);
       setIsHovering(true);
       setHoveredTab(null);
       setSliding(1);
+      // bannerScaleChange(true);
     }
   }
 
   function bgChangeLeave() {
+    setBannerScale(false);
     setActiveBanner();
     setIsHovering(false);
     setSliding(0);
     setActiveBanner(0)
+    setTimeout(() => {
+      setBannerScale(true);
+    }, 100);
   }
   
   const routeMapping = ['/history', '/assets', '/contact', '/']
@@ -152,13 +164,21 @@ export default function Home({ banner, banner_list, up_arrow }) {
                   </Link>
                 </div>
               </div>
+              {/* <Image
+                src={bannerItem.bg_img['url']}
+                width={1534}
+                height={985}
+                alt="banner image"
+                className={`absolute w-full h-full top-0 left-0 object-cover hidden md:block scale-animation
+                  ${index === 0 ? (activeBanner === 0 ? 'scale-animation' : 'scale-down-animation') : ''}`}
+              /> */}
               <Image
                 src={bannerItem.bg_img['url']}
                 width={1534}
                 height={985}
                 alt="banner image"
-                className={`absolute w-full h-full top-0 left-0 object-cover hidden md:block 
-                  ${index === 0 ? (activeBanner === 0 ? 'scale-animation' : 'scale-down-animation') : ''}`}
+                className={`absolute w-full h-full top-0 left-0 object-cover hidden md:block
+                ${index === 0 ? (bannerScale === true ? 'scale-animation' : '') : ''}`}
               />
               <Image
                 src={bannerItem.sm_background_img['url']}
@@ -179,7 +199,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
           key={index} 
           className={`select-tab w-1/3 h-[40px] py-[13px] flex justify-center ${index === hoveredTab ? "active" : ""} hover:h-[90px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
           onMouseEnter={(e) => bgChangeEnter(e,index + 1)}
-          onMouseLeave={bgChangeLeave}>
+          onMouseLeave={bgChangeLeave }>
           <div className="h-6 overflow-hidden group-hover:h-[60px]">
             <Image
               src={up_arrow['url']}
