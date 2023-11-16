@@ -209,6 +209,11 @@ html, body {
   font-family: 'Crimson Pro', serif;
 }
 
+.privacy-content h5 {
+  text-decoration: underline;
+  color: #723C3F;
+}
+
 .privacy-content p {
   color: #723C3F;
 }
