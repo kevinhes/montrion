@@ -196,6 +196,7 @@ html, body {
 }
 
 .privacy-content h1 {
-  font-size: 2em;
-  line-height: 1.2;
+  font-size: 36px;
+  line-height: 42px;
+  font-family: 'Crimson Pro', serif;
 }
