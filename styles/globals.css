@@ -201,3 +201,14 @@ html, body {
   font-family: 'Crimson Pro', serif;
   color: #723C3F;
 }
+
+.privacy-content h4 {
+  font-size: 20px;
+  line-height: 1.5;
+  color: #723C3F;
+  font-family: 'Crimson Pro', serif;
+}
+
+.privacy-content p {
+  color: #723C3F;
+}
