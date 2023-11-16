@@ -162,8 +162,8 @@ export default function Home({ banner, banner_list, up_arrow }) {
                 md:text-[2em] md:leading-[1.2]`} dangerouslySetInnerHTML={{ __html: bannerItem.content }} />
                 <div className="flex justify-center">
                   <Link href={mobileRouteMapping[index]}
-                    className="md:hidden block py-[14px] px-[30px]
-                    border border-white text-white hover:bg-white hover:text-black ">
+                    className={`md:hidden block py-[14px] px-[30px] ${ index === 0 ? 'hidden' : '' }
+                    border border-white text-white hover:bg-white hover:text-black`}>
                     Learn more
                   </Link>
                 </div>
@@ -222,7 +222,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
         {banner_list.filter((_, index) => index <= 3 && index > 0).map((item, index) => (
             <Link href={mobileRouteMapping[index]}
               key={index} 
-              className={`select-tab w-1/3 h-[48px] py-[15px] flex justify-center hover:items-center hover:h-[60px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "mx-[1px] bg-[#723C3F]" : "bg-[#606060]"}`} 
+              className={`select-tab w-1/3 h-[48px] py-[15px] flex justify-center hover:items-center hover:h-[60px] group ${index === 0 ? "bg-[#2E4E4C]" : index === 1 ? "bg-[#723C3F]" : "bg-[#606060]"}`} 
               onClick={(e) => bgChangeEnter(e,index + 1)}>
               <div className="overflow-hidden">
                 <Image
@@ -238,7 +238,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
           ))}
       </div>
       {/* cookie */}
-      <div className={`fixed w-[623px] h-[215px] right-[35px] bottom-[66px] py-[33px] pl-[35px] pr-[23px] bg-[#222727] z-50 hidden ${cookieAgree === true ? 'md:hidden' : 'md:block'}`}>
+      <div className={`fixed w-10/12 md:w-[623px] h-[280px] md:h-[215px] right-[24px] md:right-[35px] bottom-[66px] py-[33px] pl-[35px] pr-[23px] bg-[#222727] z-50 ${cookieAgree === true ? 'hidden' : 'block'}`}>
         <h4 className="text-[18px] font-crimson text-white mb-3 leading-[20px]">We value your privacy</h4>
         <p className="text-[14px] text-white font-opensans mb-[18px] leading-[19px]">We use cookies to enhance your browsing experience and analyze our traffic. By clicking on the “Agree” button or continuing to browse this website, you agree to our use of cookies. To learn more, please view our <Link href="/privacy" className="underline">Privacy Policy</Link>.</p>
         <div className="flex">
@@ -247,7 +247,7 @@ export default function Home({ banner, banner_list, up_arrow }) {
             className="bg-[#723C3F] text-white font-opensans font-semibold h-[44px] text-[16px] leading-[20px] py-[12px] px-[20px] mr-5">Agree
           </button>
           <button
-            onClick={() => changeCookie(false)}
+            onClick={() => changeCookie(true)}
             className="text-white border border-white font-opensans font-semibold h-[44px] text-[16px] leading-[20px] py-[12px] px-[20px]">Disagree
           </button>
         </div>

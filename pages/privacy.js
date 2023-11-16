@@ -14,8 +14,8 @@ export default function OverView({ initialContent }) {
   return (
     <div>
       <HeaderPageElement></HeaderPageElement>
-      <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px] py-[100px]'>
-        {content && <p dangerouslySetInnerHTML={{ __html: content }} />}
+      <div className='privacy-content mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px] py-[100px]'>
+        {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
       </div>
       <FooterElement></FooterElement>
     </div>

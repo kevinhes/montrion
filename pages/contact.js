@@ -112,7 +112,7 @@ export default function OverView({ banner, smBanner }) {
             <div className="mx-auto max-w-[327px] md:max-w-[845px] md:h-[540px]">
               <p className='text-center text-[15px] md:text-[24px] leading-[33px] font-normal text-white opacity-70 font-opensans mb-[30px]'>
                 We value your response. Thank you.<br />
-                We‘ll get back to you promptly.
+                We will get back to you promptly
               </p>
               <div className="flex justify-center">
                 <Link href="/" class="py-5 px-[45px] bg-[#723C3F] text-white text-[18px] leading-[20px] font-opensans block">
@@ -121,7 +121,7 @@ export default function OverView({ banner, smBanner }) {
               </div>
             </div>
           ) : (
-            <form action="" className='mx-auto max-w-[327px] md:max-w-[845px] font-opensans' onSubmit={handleSubmit(onSubmit)}>
+            <form action="" className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[845px] font-opensans' onSubmit={handleSubmit(onSubmit)}>
               <div className="md:flex md:mb-5 mb-[10px]">
                 <div className="relative md:w-1/2 md:mr-5">
                   <input
@@ -149,17 +149,28 @@ export default function OverView({ banner, smBanner }) {
                 </div>
               </div>
               <div className="md:flex md:mb-5 mb-[10px]">
-                <input
-                  type="text"
-                  {...register( 'customerCompany' )}
-                  className='md:mr-5 w-full md:w-auto flex-grow
-                  form-control mb-[10px] md:mb-0 md:pl-[41px] flex items-center h-[55px] md:h-[50px] pl-[18px]'
-                  placeholder='Company' />
-                <input
-                  type="text"
-                  {...register( 'customerPosition' )}
-                  className='w-full md:w-auto flex-grow form-control h-[55px] md:h-[50px] flex items-center md:pl-[41px] pl-[18px]'
-                  placeholder='Position' />
+                <div className="md:w-1/2 relative md:mr-5">
+                  <input
+                    type="text"
+                    {...register( 'customerCompany', { required:true } )}
+                    className={`w-full flex-grow form-control h-[55px] md:h-[50px]
+                    flex items-center pl-[18px] md:pl-[41px] ${errors.customerCompany ? 'border border-[#FF0000]' : ''}`}
+                    placeholder='Company' />
+                    <div className={`mt-5 errormessage ${errors.customerCompany ? 'active' : ''}`}>
+                      <p className='text-[#ff0000]'>Please complete this mandatory field</p>
+                    </div>
+                </div>
+                <div className="md:w-1/2 relative">
+                  <input
+                    type="text"
+                    {...register( 'customerPosition', { required:true } )}
+                    className={`w-full flex-grow form-control h-[55px] md:h-[50px]
+                    flex items-center pl-[18px] md:pl-[41px] ${errors.customerPosition ? 'border border-[#FF0000]' : ''}`}
+                    placeholder='Position' />
+                    <div className={`mt-5 errormessage ${errors.customerPosition ? 'active' : ''}`}>
+                      <p className='text-[#ff0000]'>Please complete this mandatory field</p>
+                    </div>
+                </div>
               </div>
               <div className='md:mb-5 mb-[10px]'>
                 <div className=''>
@@ -180,13 +191,15 @@ export default function OverView({ banner, smBanner }) {
                   </div>
                 </div>
               </div>
-
-              <div className='md:mb-5 mb-[10px]'>
+              <div className='md:mb-5 mb-[10px] relative'>
                 <input
                   type="text"
-                  {...register( 'customerSubject' )}
-                  className='form-control w-full md:pl-[41px] h-[55px] md:h-[50px] flex items-center pl-[18px]'
+                  {...register( 'customerSubject', { required:true } )}
+                  className={`form-control w-full md:pl-[41px] h-[55px] md:h-[50px] flex items-center pl-[18px] ${errors.customerSubject ? 'border border-[#FF0000]' : ''}`}
                   placeholder='Subject' />
+                <div className={`mt-5 errormessage ${errors.customerSubject ? 'active' : ''}`}>
+                  <p className='text-[#ff0000]'>Please complete this mandatory field</p>
+                </div>
               </div>
               <div className="md:mb-[30px] mb-[24px]">
                 <div>
