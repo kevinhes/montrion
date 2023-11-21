@@ -92,7 +92,7 @@ export default function OverView({ banner, smBanner }) {
         <h3 className='md:w-[680px] text-[#2E4E4C] font-opensans
         md:text-[20px] text-[12px] md:leading-[36px] tracking-[2px] font-normal
         md:pb-[11px] pb-[10px] border-b border-[#2E4E4C] md:mb-[36px] mb-[24px]'>
-          CONTACT
+          Contact
         </h3>
         <h2 className="text-[#723C3F] md:w-[680px] font-crimson
         md:text-[36px] text-[20px] md:leading-[42px] leading-normal font-bold mb-[30px]">
@@ -112,7 +112,7 @@ export default function OverView({ banner, smBanner }) {
             <div className="mx-auto max-w-[327px] md:max-w-[845px] md:h-[540px]">
               <p className='text-center text-[15px] md:text-[24px] leading-[33px] font-normal text-white opacity-70 font-opensans mb-[30px]'>
                 We value your response. Thank you.<br />
-                We will get back to you promptly
+                We will get back to you promptly.
               </p>
               <div className="flex justify-center">
                 <Link href="/" class="py-5 px-[45px] bg-[#723C3F] text-white text-[18px] leading-[20px] font-opensans block">
@@ -154,7 +154,7 @@ export default function OverView({ banner, smBanner }) {
                     type="text"
                     {...register( 'customerCompany', { required:true } )}
                     className={`w-full flex-grow form-control h-[55px] md:h-[50px]
-                    flex items-center pl-[18px] md:pl-[41px] ${errors.customerCompany ? 'border border-[#FF0000]' : ''}`}
+                    flex items-center pl-[18px] md:pl-[41px] mb-[10px] md:mb-0 ${errors.customerCompany ? 'border border-[#FF0000]' : ''}`}
                     placeholder='Company' />
                     <div className={`mt-5 errormessage ${errors.customerCompany ? 'active' : ''}`}>
                       <p className='text-[#ff0000]'>Please complete this mandatory field</p>
@@ -180,7 +180,8 @@ export default function OverView({ banner, smBanner }) {
                       required: 'Please complete this mandatory field',
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: 'Please provide a valid email address'
+                        // message: 'Please provide a valid email address',
+                        message: '請在電子郵件中包含「@」',
                       }
                     })}
                     className={`form-control w-full md:pl-[41px] h-[55px] md:h-[50px]
@@ -229,7 +230,7 @@ export default function OverView({ banner, smBanner }) {
                 md:leading-[20px] leading-normal font-opensans hover:bg-[#2E4E4C] hover:text-white' />
                 {hasErrors(errors) && (
                     <div className="mt-5 errormessage active">
-                        <p className='text-[#ff0000]'>Some fields require your attention.</p>
+                        <p className='text-[#ff0000]'>Some fields require your attention</p>
                     </div>
                 )}
               </div>

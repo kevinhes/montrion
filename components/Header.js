@@ -16,8 +16,11 @@ export const HeaderElement = ( { logo } ) => {
   const [ mobileSubmenu, setMobileSubmenu ] = useState(0);
 
   const pageReload = (e, path) => {
-    e.preventDefault();
-    router.push(`/${path}`);
+    if (router.pathname === path) {
+      e.preventDefault();
+      // 强制导航到指定的路径，即使我们已经在那里了
+      router.reload();
+    }
   };
 
   function moblieSubmenuActive(e) {
@@ -76,7 +79,7 @@ export const HeaderElement = ( { logo } ) => {
       <div className='page-ani fixed z-50 left-0 right-0 bg-[#222727] overflow-hidden md:overflow-visible'>
         <div className='mx-auto max-w-[327px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1230px] 2xl:max-w-[1230px] flex justify-between items-center h-[70px] md:h-[55px]'>
           <div>
-            <Link href="/" className='w-[135px] h-[15px] md:w-[151px] md:h-[17px] overflow-hidden flex'>
+            <Link href="/" className='w-[135px] h-[15px] md:w-[151px] md:h-[17px] overflow-hidden flex' onClick={(e) => {pageReload(e, '/')}}>
               <Image
                 src='/images/logo-light.png'
                 alt='logo'
@@ -91,7 +94,7 @@ export const HeaderElement = ( { logo } ) => {
             <div className="flex h-full px-[30px] mr-[10px] items-center relative group"
             onMouseEnter={() => filterChangeEnter()}
             onMouseLeave={() => filterChangeLeave()}>
-              <p className='mr-[10px] cursor-pointer'>About us</p>
+              <p className='mr-[10px] cursor-pointer'>About Us</p>
               <Image src="/images/ExpandArrowdown.png" alt="arrow" width={15} height={15} className="group-hover:rotate-180 transition duration-1000" />
               <div
                 className="absolute top-[55px] right-[130px] translate-x-1/2 z-50
@@ -99,7 +102,7 @@ export const HeaderElement = ( { logo } ) => {
                 <div className="flex h-[0px] overflow-hidden group-hover:h-[120px] transition-all duration-1000">
                   <div className='w-[300px] bg-[#606060] flex justify-center items-center'>
                     <p className="text-white pl-[35px] pr-[30px] font-opensans text-[16px] leading-normal">
-                      An investment holding company rooted in integrity and resilience.
+                      An investment holding company rooted in integrity and resilience
                     </p>
                   </div>
                   <div className='w-[210px] text-[#222727]'>
@@ -122,14 +125,14 @@ export const HeaderElement = ( { logo } ) => {
             <div className="flex h-full px-[30px] mr-[10px] items-center relative group"
               onMouseEnter={() => filterChangeEnter()}
               onMouseLeave={() => filterChangeLeave()}>
-              <p className='mr-[10px] cursor-pointer'>Investment</p>
+              <p className='mr-[10px] cursor-pointer'>Investments</p>
               <Image src="/images/ExpandArrowdown.png" alt="arrow" width={15} height={15} className="group-hover:rotate-180 transition duration-1000" />
               <div
                 className="absolute top-[55px] right-[130px] translate-x-1/2 z-50 shadow-[0px_4px_20px_rgba(0,0,0,0.25)]">
                 <div className="flex h-[0px] overflow-hidden group-hover:h-[120px] transition-all duration-1000">
                   <div className='w-[300px] bg-[#606060] flex items-center justify-center'>
                     <p className="text-white font-opensans text-[16px] leading-normal pl-[35px] pr-[30px]">
-                      Investing with integrity.
+                      Investing with integrity
                     </p>
                   </div>
                   <div className='w-[210px] text-[#222727]'>
@@ -172,10 +175,10 @@ export const HeaderElement = ( { logo } ) => {
 
                 <div
                   className="max-w-[327px] mx-auto flex justify-between items-center py-5" data-menu="about" onClick={(e) => {moblieSubmenuActive(e)}}>
-                  <p className="text-white text-[16px] leading-normal font-semibold pointer-events-none">About</p>
-                  <div>
+                  <div className="text-white text-[16px] leading-normal font-semibold pointer-events-none flex justify-between w-full">
+                    About Us
                     <Image src='/images/expandarrow.png' width={22} height={18} alt=""
-                    className={`${ mobileSubmenu === 'about' ? 'rotate-180' : '' } `} />
+                    className={`block w-[22px] h-[19px] ${ mobileSubmenu === 'about' ? 'rotate-180' : '' } `} />
                   </div>
                 </div>
 
@@ -205,10 +208,10 @@ export const HeaderElement = ( { logo } ) => {
             <div className="font-opensans text-white overflow-hidden">
               <div className={`group mobile-menu-ani ${activeMenu === 1 ? 'active': ''}`}>
                 <div className="max-w-[327px] mx-auto flex justify-between items-center py-5" data-menu="Investment" onClick={(e) => {moblieSubmenuActive(e)}}>
-                  <p className="text-white text-[16px] leading-normal font-semibold pointer-events-none">Investment</p>
-                  <div>
+                  <div className="text-white text-[16px] leading-normal font-semibold pointer-events-none flex justify-between w-full">
+                    Investment
                     <Image src='/images/expandarrow.png' width={22} height={18} alt=""
-                    className={`${ mobileSubmenu === 'Investment' ? 'rotate-180' : '' } `} />
+                    className={`block w-[22px] h-[19px] ${ mobileSubmenu === 'Investment' ? 'rotate-180' : '' } `} />
                   </div>
                 </div>
                 <div className={`mobile-submenu overflow-hidden ${ mobileSubmenu === 'Investment' ? 'active' : '' }`}>
@@ -242,7 +245,7 @@ export const HeaderElement = ( { logo } ) => {
           </div>
           <div className="text-white pb-[51px] opacity-40 text-[12px] font-opensans">
             <div className="max-w-[327px] mx-auto">
-              <p className="mb-[3px]"><Link href='/term'>Terms of Use</Link> | <Link href='/privacy'>Privacy & Policy</Link> </p>
+              <p className="mb-[3px]"><Link href='/term'>Terms of Use</Link> | <Link href='/privacy'>Privacy Policy</Link> </p>
               <p>Montrion Corporation © Copyright 2023</p>
             </div>
           </div>
